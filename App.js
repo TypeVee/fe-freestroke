@@ -1,4 +1,4 @@
-import { NavigationContainer } from '@react-navigation/native';
+ import { NavigationContainer } from '@react-navigation/native';
 import NavigationBar from './Components/Navigation/NavigationBar';
 
 
