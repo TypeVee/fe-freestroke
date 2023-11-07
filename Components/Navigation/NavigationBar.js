@@ -1,7 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeScreen, MyAccount, Map, Saved } from './index';
-import { SingleLocation } from '../Locations';
-
 
 const Tab = createBottomTabNavigator();
 
