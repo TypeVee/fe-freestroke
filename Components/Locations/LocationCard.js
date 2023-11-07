@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
-import SingleLocation from './SingleLocation';
+
 
 export default function LocationCard({navigation}) {
 
@@ -13,7 +13,7 @@ export default function LocationCard({navigation}) {
        style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}
        onPress={handlePress}
        >
-        <Text>SingleLocation</Text>
+        <Text>Location Card</Text>
       </TouchableOpacity>
     );
   }

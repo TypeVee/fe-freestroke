@@ -1,7 +1,7 @@
-import HomeScreen from "./Home";
-import Map from "./Map";
-import MyAccount from "./MyAccount";
-import Saved from "./Saved";
+import HomeScreen from "./HomeTab";
+import Map from "./MapTab";
+import MyAccount from "./MyAccountTab";
+import Saved from "./SavedTab";
 
 
 export {HomeScreen, MyAccount, Map, Saved}
