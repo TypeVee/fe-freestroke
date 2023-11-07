@@ -4,15 +4,14 @@ import SwimmingAdvice from '../index';
 
 
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Home!</Text>
-        <NearbyTopLocations />
+        <NearbyTopLocations navigation={navigation}/>
         <AllLocations />
         <SwimmingAdvice />
         <AddLocationHome />
-        
       </View>
     );
   }

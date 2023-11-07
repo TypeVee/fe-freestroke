@@ -1,5 +1,7 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeScreen, MyAccount, Map, Saved } from './index';
+import { SingleLocation } from '../Locations';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -11,7 +13,7 @@ export default function NavigationBar() {
       <Tab.Screen name="Home" component={HomeScreen} /> 
       <Tab.Screen name="Map" component={Map} />  
       <Tab.Screen name="Saved" component={Saved} />  
-      <Tab.Screen name="My Account" component={MyAccount} />  
+      <Tab.Screen name="My Account" component={MyAccount} />
     </Tab.Navigator>
   );
 }
