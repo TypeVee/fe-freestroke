@@ -1,18 +1,16 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function AddLocationButton({navigation}) {
+export default function ConfirmLocationButton({navigation}) {
 
     const handlePress = () => {
-        navigation.navigate('Add Location Map');
+        navigation.navigate('Post Location');
       };
 
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
            <TouchableOpacity onPress={handlePress}>
-              <Text>+ Button</Text>
+              <Text>Confirm Location</Text>
           </TouchableOpacity>
       </View>
     );
   }
-
- 
