@@ -6,6 +6,17 @@ function openDatabase() {
   }
 const db = openDatabase();
 
+async function createLocationTable(database="savedLocations", name, latitude, longitude, rating){
+    return new Promise ((resolve, reject) =>{
+        db.transaction(
+            (tx) => {
+                tx.executeSql(`create table if not exists ${database} (name text, latitude float, longitude float, rating float(1, 1))`, [],()=>{resolve()},(_, error) => {
+                    reject(error)
+                } )},    
+                );
+            },
+        )}
+
 async function saveLocation(database="savedLocations", name, latitude, longitude, rating){
     return new Promise ((resolve, reject) =>{
         db.transaction(
@@ -38,7 +49,7 @@ async function fetch(database = "savedLocations") {
     }
 
 
-module.exports = {db, fetch, saveLocation }
+module.exports = {db, fetch, saveLocation, createLocationTable }
 
 /* Local databases
 savedLocations --- User's saved locations
