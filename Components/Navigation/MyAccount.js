@@ -15,12 +15,9 @@ export default function MyAccount() {
 }, (err)=>console.log(err), (res)=>console.log("Database up with data"))
   
  
-  // async function checkDB () { //Need to deal with async/promises for getting this data
-  //   let result = "Hello"
-  //   console.log(result)
-  //   result = await fetch('testLocations')
-  //   console.log(result)
-  // }
+  function checkDB () { //Need to deal with async/promises for getting this data
+    fetch('testLocations').then((res)=>{console.log(res)})
+  }
   
     return (
       <View>

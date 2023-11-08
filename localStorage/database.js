@@ -6,28 +6,39 @@ function openDatabase() {
   }
 const db = openDatabase();
 
-const saveLocation = (locationObject, database="savedLocations") => {
-    db.transaction(
-      (tx) => {
-        tx.executeSql(`insert into ${database} (${(Object.keys(locationObject).join(', '))}) values (?)`, [locationObject.join(', ')]);
-        tx.executeSql(`select * from ${database}`, [], (_, { rows }) =>
-        JSON.stringify(rows)
-        );
-      },
-      null,
-      forceUpdate
-    );}
-const fetch = (database) =>{ //Async problems here
-    db.transaction(
-        (tx) => {
-            tx.executeSql(`select * from ${database}`, [], (_, { rows }) =>
-            {return JSON.stringify(rows)} //
-            )
-        }
-    ), (err)=>console.log(err)
+async function saveLocation(database="savedLocations", name, latitude, longitude, rating){
+    return new Promise ((resolve, reject) =>{
+        db.transaction(
+            (tx) => {
+                tx.executeSql(`insert into ${database} (name, latitude, longitude, rating) 
+                                values ("${name}", ${latitude}, ${longitude}, ${rating})`, [],(_, { rows }) =>{
+                        const data = JSON.stringify(rows)
+                        resolve(data)
+                    },
+                    (_, error) => {
+                        reject(error)
+                    });
+            },
+        )}
+    )
 }
+async function fetch(database = "savedLocations") {
+    return new Promise((resolve, reject) => {
+        db.transaction(
+        (tx) => {
+            tx.executeSql(`select * from ${database}`,[],(_, { rows }) => {
+                const data = JSON.stringify(rows)
+                resolve(data)
+            },
+            (_, error) => {
+                reject(error)
+            })
+        })
+    })
+    }
 
-module.exports = {db, fetch, saveLocation}
+
+module.exports = {db, fetch, saveLocation }
 
 /* Local databases
 savedLocations --- User's saved locations
