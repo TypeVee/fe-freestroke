@@ -3,7 +3,7 @@
 
 # dependencies
 node_modules/
-localDatabase/firebase.js
+localDatabase/firebaseConfig.js
 
 # Expo
 .expo/
