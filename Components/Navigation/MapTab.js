@@ -1,8 +1,9 @@
-import {  StyleSheet, View } from 'react-native';
+import {  Button, StyleSheet, View } from 'react-native';
 import { AddLocationButton } from '../Locations';
 import MapView from 'react-native-maps';
 import * as Location from 'expo-location';
 import { useEffect, useState } from 'react';
+
 
 export default function MapTab({navigation}) {
 
@@ -29,7 +30,7 @@ if (status !== 'granted') {
     text = JSON.stringify(location);
   }
 
-
+  
     return (
 
         <View style={styles.container}>
@@ -42,7 +43,6 @@ if (status !== 'granted') {
             longitudeDelta: 13,
         }}
         showsUserLocation={true}>
-      
         </MapView>
         <AddLocationButton navigation={navigation}/>
       </View>
@@ -53,10 +53,11 @@ if (status !== 'granted') {
 const styles = StyleSheet.create({
     container: {
       flex: 1,
+      position: 'relative',
     },
     map: {
       width: '100%',
-      height: '100%'
+      height: '100%',
     },
   });
   

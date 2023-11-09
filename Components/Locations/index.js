@@ -1,4 +1,4 @@
-import AddLocationButton from "./AddLocationButton"
+import AddLocationButton from "./AddLocationButtonMap"
 import AddLocationHome from "./AddLocationHome"
 import AllLocations from "./AllLocations"
 import NearbyTopLocations from "./NearbyTopLocations"
