@@ -1,5 +1,5 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { HomeScreen, MyAccount, Map, Saved } from './index';
+import { HomeScreen, MyAccount, Map, Saved, MainComponent } from './index';
 
 const Tab = createBottomTabNavigator();
 
@@ -12,6 +12,7 @@ export default function NavigationBar() {
       <Tab.Screen name="Map" component={Map} />  
       <Tab.Screen name="Saved" component={Saved} />  
       <Tab.Screen name="My Account" component={MyAccount} />
+      <Tab.Screen name="Log in" component={MainComponent} />
     </Tab.Navigator>
   );
 }
