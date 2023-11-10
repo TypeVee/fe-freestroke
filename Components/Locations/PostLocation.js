@@ -49,7 +49,7 @@ export default function PostLocation ({route}) {
           return
         }
         uploadImage(imageURI).then((url)=>{
-        console.log({'name': locationName, 'area': area, 'description': locationDescription, 'imageSrc': url, 'coords':draggableLocation})
+        console.log({'uid': "???", "location_name":locationName,'location_area': area, 'body': locationDescription, 'location_img_url': url, 'coordinates':draggableLocation})
     })
     }
 
