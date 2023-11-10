@@ -49,13 +49,9 @@ export default function PostLocation ({route}) {
           return
         }
         uploadImage(imageURI).then((url)=>{
-        console.log('Location Name:', locationName)
-        console.log('Area:', area)
-        console.log('Location Description:', locationDescription),
-        console.log('Image src: ', url)})
+        console.log({'name': locationName, 'area': area, 'description': locationDescription, 'imageSrc': url, 'coords':draggableLocation})
+    })
     }
-
-    console.log(draggableLocation,"IN POST LOCATION")
 
     return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
