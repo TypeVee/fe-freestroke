@@ -5,18 +5,23 @@ import Icon from 'react-native-ico-material-design';
 
 const Tab = createBottomTabNavigator();
 
-export default function NavigationBar({ user }) {
+export default function NavigationBar({ user, route}) {
+ const {userLocation} = route.params
+
   return (
     <Tab.Navigator initialRouteName='Home' screenOptions={{
       tabBarActiveTintColor: '#0f98e1',
     }}>
 
-      <Tab.Screen name="Home" component={HomeScreen}  options={{
+      <Tab.Screen name="Home" component={HomeScreen} 
+       options={{
         tabBarLabel:() => {return null},
           tabBarIcon: () => (
             <Icon name="home-button" color='#489FE1'/>
           ),
-        }}/> 
+        }}
+        initialParams={{userLocation}}
+        /> 
       <Tab.Screen name="Map" component={Map} options={{
         tabBarLabel:() => {return null},
           tabBarIcon: () => (
