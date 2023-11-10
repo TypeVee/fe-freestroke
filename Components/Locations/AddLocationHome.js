@@ -1,12 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
-import AddLocationButton from './AddLocationButton';
+import AddLocationButtonHome from './AddLocationButtonHome';
 
 
 export default function AddLocationHome({navigation}) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Post location container</Text>
-        <AddLocationButton navigation={navigation}/>
+        <Text>Know a cool swim spot?</Text>
+        <AddLocationButtonHome navigation={navigation}/>
       </View>
     );
   }
