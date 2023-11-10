@@ -8,3 +8,9 @@ export const getLocationByID = (location_id) => {
         return res.data.location
     })
 }
+
+export const getLocations = () => {
+    return freeStrokeAPI.get(`/locations?limit=500`).then ((res) => {
+        return res.data
+    })
+}

@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
 import { useState } from 'react';
 
-export default function PostLocation () {
+export default function PostLocation ({draggableLocation}) {
 
     const [locationName, setLocationName] = useState('');
     const [area, setArea] = useState('')
@@ -28,7 +28,7 @@ export default function PostLocation () {
         console.log('Area:', area)
         console.log('Location Description:', locationDescription)   
     }
-    
+    console.log(draggableLocation,"IN POST LOCATION")
     return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Enter Location details:</Text>
