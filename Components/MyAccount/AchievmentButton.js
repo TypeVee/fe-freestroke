@@ -1,7 +1,6 @@
 import { StyleSheet, Text , TouchableOpacity, View } from 'react-native';
 
-export default function AchievmentButton({navigation}) {
-   
+export default function AchievementButton({navigation, user}) {
   const handlePress = () => {
     navigation.navigate('Achievments');}
 

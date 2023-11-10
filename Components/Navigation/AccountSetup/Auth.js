@@ -4,14 +4,14 @@ import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../../../localDatabase/firebase';
 
 const AuthDetails = () => {
-  const [authUser, setAuthUser] = useState(null);
+  const [user, setUser] = useState(null);
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setAuthUser(user);
+        setUser(user);
       } else {
-        setAuthUser(null);
+        setUser(null);
       }
     });
 
@@ -32,9 +32,9 @@ const AuthDetails = () => {
 
   return (
     <View>
-      {authUser ? (
+      {user ? (
         <>
-          <Text>{`Signed in as ${authUser.email}`}</Text>
+          <Text>{`Signed in as ${user.email}`}</Text>
           <Button title="Sign Out" onPress={userSignOut} />
         </>
       ) : (
