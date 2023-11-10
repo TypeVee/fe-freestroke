@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 
-export default function LocationHistoryButton({navigation}) {
+export default function LocationHistoryButton({navigation, user}) {
   const handlePress = () => {
     navigation.navigate('Location History');}
 
