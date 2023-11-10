@@ -7,7 +7,7 @@ export default function ConfirmLocationButton({ draggableLocation ,navigation}) 
       };
 console.log(draggableLocation,"IN BUTTON")
     return (
-      <View style={{position: 'absolute', flex: 1, bottom: 20}}>
+      <View style={{position: 'absolute', flex:1, bottom: 20}}>
            <TouchableOpacity onPress={handlePress}
            style={styles.touchables}>
               <Text style={styles.text}>Confirm Location</Text>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../../../firebase';
+import { auth } from '../../../localDatabase/firebase';
 
 const AuthDetails = () => {
   const [user, setUser] = useState(null);
@@ -9,7 +9,11 @@ const AuthDetails = () => {
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
       if (user) {
-        setUser(user);
+        setUser({
+          uid: user.uid,
+          email: user.email,
+          displayName: user.displayName || '',
+        });
       } else {
         setUser(null);
       }
@@ -34,7 +38,8 @@ const AuthDetails = () => {
     <View>
       {user ? (
         <>
-          <Text>{`Signed in as ${user.email}`}</Text>
+          <Text>{`Signed in as ${user.displayName}`}</Text>
+          {user.displayName && <Text>{`Display Name: ${user.displayName}`}</Text>}
           <Button title="Sign Out" onPress={userSignOut} />
         </>
       ) : (

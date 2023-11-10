@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, Text, TextInput, Button, Platform } from 'react-native';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const Signin = () => {
   const [email, setEmail] = useState('');
@@ -11,7 +13,7 @@ const Signin = () => {
     const auth = getAuth();
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        console.log(userCredential);
+        console.log(userCredential.user.email);
       })
       .catch((error) => {
         setErr(error.code);
@@ -20,9 +22,9 @@ const Signin = () => {
   };
 
   return (
-    <KeyboardAvoidingView
-      behavior={Platform.OS === 'ios' ? 'padding' : null}
-      style={{ flex: 1, justifyContent: 'center', padding: 16 }}
+    <KeyboardAwareScrollView
+    contentContainerStyle={{ flexGrow: 1, justifyContent: 'center', padding: 16 }}
+    enableOnAndroid={true}
     >
       <Text>Log In</Text>
       <TextInput
@@ -43,7 +45,7 @@ const Signin = () => {
         <Text>Sign In</Text>
       </Button>
       {err && <Text>{err}</Text>}
-    </KeyboardAvoidingView>
+    </KeyboardAwareScrollView>
   );
 };
 

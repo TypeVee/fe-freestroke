@@ -5,8 +5,11 @@ import Icon from 'react-native-ico-material-design';
 
 const Tab = createBottomTabNavigator();
 
+
 export default function NavigationBar({ user, route}) {
- const {userLocation} = route.params
+ const {userLocation, user, setUser} = route.params
+
+  console.log(user);
 
   return (
     <Tab.Navigator initialRouteName='Home' screenOptions={{
@@ -41,13 +44,14 @@ export default function NavigationBar({ user, route}) {
             <Icon name="user-shape"  color='#489FE1'/>
           ),
         }}/>
-        ) : null}
-      <Tab.Screen name="Log in" component={MainComponent} options={{
-       tabBarLabel:() => {return null},
-          tabBarIcon: () => (
-            <Icon name="user-outline"  color='#489FE1'/>
-          ),
-        }}/>
+        ) : (
+          <Tab.Screen name="Log in" component={MainComponent} options={{
+            tabBarLabel: () => { return null },
+            tabBarIcon: () => (
+              <Icon name="user-outline" color='#489FE1' />
+            ),
+          }} />
+        )}
 
     </Tab.Navigator>
   );
