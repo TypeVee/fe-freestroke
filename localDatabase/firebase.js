@@ -1,12 +1,15 @@
 import { initializeApp } from 'firebase/app';
-import * as ImagePicker from "expo-image-picker";
+import { getAuth } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import 'react-native-get-random-values';
 const uuid = require('uuid')
 import {firebaseConfig} from './firebaseConfig'
 
-  initializeApp(firebaseConfig)
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app)
 
+
+//Functions
 async function handleImagePicked(ImageUri) {
         const uploadUrl = await uploadImageAsync(ImageUri);
         return uploadUrl
@@ -38,4 +41,4 @@ const uploadImage = async function (ImageUri){
         resolve(url)}))
     }
 
-  module.exports = { initializeApp, uploadImage}
+module.exports = { initializeApp, uploadImage, auth}

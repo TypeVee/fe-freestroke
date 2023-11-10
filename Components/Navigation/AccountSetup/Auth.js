@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, Button } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
-import { auth } from '../../../firebase';
+import { auth } from '../../../localDatabase/firebase';
 
 const AuthDetails = () => {
   const [authUser, setAuthUser] = useState(null);

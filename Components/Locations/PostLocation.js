@@ -1,7 +1,7 @@
 import { StyleSheet, Text, View, TextInput, Button, Image, TouchableHighlight} from 'react-native';
 import { useState } from 'react';
 import * as ImagePicker from "expo-image-picker";
-import { initializeApp, uploadImage} from "../../localDatabase/firebase";
+import { uploadImage} from "../../localDatabase/firebase";
 
 export default function PostLocation ({route}) {
 
