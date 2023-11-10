@@ -9,6 +9,7 @@ export default function AchievementButton({navigation, user}) {
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <TouchableOpacity onPress={handlePress}>
         <Text>Achievements here!</Text>
+        <Text>{user}</Text>
         </TouchableOpacity>
       </View>
     )
