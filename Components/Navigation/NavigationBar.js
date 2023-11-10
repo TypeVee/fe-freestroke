@@ -29,12 +29,14 @@ export default function NavigationBar({ user }) {
             <Icon name="bookmark-ribbon"  color='#489FE1'/>
           ),
         }}/>  
+        {user ? (
       <Tab.Screen name="My Account" component={MyAccount} options={{
         tabBarLabel:() => {return null},
           tabBarIcon: () => (
             <Icon name="user-shape"  color='#489FE1'/>
           ),
         }}/>
+        ) : null}
       <Tab.Screen name="Log in" component={MainComponent} options={{
        tabBarLabel:() => {return null},
           tabBarIcon: () => (
