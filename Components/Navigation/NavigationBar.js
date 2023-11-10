@@ -6,10 +6,10 @@ import Icon from 'react-native-ico-material-design';
 const Tab = createBottomTabNavigator();
 
 
-export default function NavigationBar({ user, route}) {
- const {userLocation, user, setUser} = route.params
+export default function NavigationBar({route}) {
 
-  console.log(user);
+  console.log(route.params)
+ const {userLocation, user} = route.params
 
   return (
     <Tab.Navigator initialRouteName='Home' screenOptions={{
