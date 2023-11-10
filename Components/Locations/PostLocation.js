@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image, TouchableHighlight} from 'react-native';
 import { useState } from 'react';
 import * as ImagePicker from "expo-image-picker";
 import { initializeApp, uploadImage} from "../../localDatabase/firebase";
@@ -8,9 +8,16 @@ export default function PostLocation () {
     const [locationName, setLocationName] = useState('');
     const [area, setArea] = useState('')
     const [locationDescription, setLocationDescription] = useState('')
+    const [imageURI, setImageURI] = useState()
     
-    
-    
+    const selectImage = async function (){
+       const tempImage = await ImagePicker.launchImageLibraryAsync({
+        quality: 1,
+      })
+      
+      setImageURI(tempImage.assets[0].uri)
+    }
+
     async function requestClientPerms() {
       if (Platform.OS !== "web") {
         const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -34,10 +41,16 @@ export default function PostLocation () {
         setLocationDescription(input)
       }
 
-    const submitLocation = () => {
+    const submitLocation = function (){
+        if(!imageURI || !locationName || !area || !locationDescription){
+          alert('Please fill in all information')
+          return
+        }
+        uploadImage(imageURI).then((url)=>{
         console.log('Location Name:', locationName)
         console.log('Area:', area)
-        console.log('Location Description:', locationDescription)   
+        console.log('Location Description:', locationDescription),
+        console.log('Image src: ', url)})
     }
     
     return (
@@ -64,7 +77,11 @@ export default function PostLocation () {
         numberOfLines={4}
         textAlignVertical="top"
       />
-      <Button title="Upload Images" onPress={uploadImage}/>
+      {}
+        <TouchableHighlight onPress={()=>setImageURI()}>
+          <Image source={{uri: (imageURI !== undefined ? imageURI : undefined)}} style={{width:100, height:100}}/>
+        </TouchableHighlight>
+      <Button title="Upload Image" onPress={selectImage}/>
       <Button title="Submit" onPress={submitLocation} />
     </View>
     )

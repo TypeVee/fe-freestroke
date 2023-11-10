@@ -7,17 +7,10 @@ import {firebaseConfig} from './firebaseConfig'
 
   initializeApp(firebaseConfig)
 
-async function handleImagePicked(pickerResult) {
-    try {
-      if (!pickerResult.cancelled) {
-        const uploadUrl = await uploadImageAsync(pickerResult.assets[0].uri);
+async function handleImagePicked(ImageUri) {
+        const uploadUrl = await uploadImageAsync(ImageUri);
         return uploadUrl
-      }
-    } catch (e) {
-      alert("Upload failed, sorry :(");
-      console.log(e)
-    }
-  };
+  }
 
 async function uploadImageAsync(uri) {
   const blob = await new Promise((resolve, reject) => {
@@ -27,7 +20,7 @@ async function uploadImageAsync(uri) {
     };
     xhr.onerror = function (e) {
       console.log(e);
-      reject(new TypeError("Network request failed"));
+      reject(new TypeError("Upload failed"));
     };
     xhr.responseType = "blob";
     xhr.open("GET", uri, true);
@@ -40,10 +33,9 @@ async function uploadImageAsync(uri) {
     return await getDownloadURL(fileRef);
   }
 
-const uploadImage = async function (){
-      let pickerResult = await ImagePicker.launchImageLibraryAsync({
-      });
-      handleImagePicked(pickerResult).then((url)=>{return url});
+const uploadImage = async function (ImageUri){
+      return new Promise((resolve, reject)=> handleImagePicked(ImageUri).then((url)=>{
+        resolve(url)}))
     }
 
   module.exports = { initializeApp, uploadImage}
