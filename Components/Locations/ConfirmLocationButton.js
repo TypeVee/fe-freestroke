@@ -3,7 +3,7 @@ import {  StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 export default function ConfirmLocationButton({ draggableLocation ,navigation}) {
 
     const handlePress = () => {
-        navigation.navigate('Post Location');
+        navigation.navigate('Post Location', {draggableLocation});
       };
 console.log(draggableLocation,"IN BUTTON")
     return (

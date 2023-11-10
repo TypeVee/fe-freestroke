@@ -3,7 +3,9 @@ import { useState } from 'react';
 import * as ImagePicker from "expo-image-picker";
 import { initializeApp, uploadImage} from "../../localDatabase/firebase";
 
-export default function PostLocation ({draggableLocation}) {
+export default function PostLocation ({route}) {
+
+    const {draggableLocation} = route.params
 
     const [locationName, setLocationName] = useState('');
     const [area, setArea] = useState('')
@@ -52,7 +54,9 @@ export default function PostLocation ({draggableLocation}) {
         console.log('Location Description:', locationDescription),
         console.log('Image src: ', url)})
     }
+
     console.log(draggableLocation,"IN POST LOCATION")
+
     return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Enter Location details:</Text>

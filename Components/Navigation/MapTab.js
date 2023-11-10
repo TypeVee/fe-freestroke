@@ -40,9 +40,15 @@ getLocations().then(({locations})=>{
 })
   },[])
 
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
 
-if(!loading){
-      return (
+  return (
 
         <View style={styles.container}>
         <MapView 
@@ -54,12 +60,15 @@ if(!loading){
             longitudeDelta: 13,
         }}
         showsUserLocation={true}>
+          
   {locationData.map((location)=>{
 
          const string = JSON.stringify(location)
          const parsed = JSON.parse(string)
 
-           return  <Marker coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}/>
+           return  <Marker 
+           key={parsed.id}
+           coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}/>
         
           })}
       
@@ -70,7 +79,7 @@ if(!loading){
     
   
     )
-}
+
 
 
 }
