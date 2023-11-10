@@ -8,17 +8,45 @@ import LocationHistory from './Components/MyAccount/LocationHistoryButton';
 import AddLocationMap from './Components/Maps';
 import PostLocation from './Components/Locations/PostLocation';
 import AuthDetails from './Components/Navigation/AccountSetup/Auth';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import * as Location from 'expo-location';
+
 
 const Stack = createStackNavigator();
 
 export default function App() {
-  const [user, setUser] = useState(null);
 
+  const [user, setUser] = useState(null);
+  const [userLocation, setUserLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
+  const [locationLoading, setLocationLoading] = useState(true);
+  
+  useEffect(() => {
+
+    Location.requestForegroundPermissionsAsync().then((status)=>{
+    if (status !== 'granted') {
+            setErrorMsg('Permission to access location was denied');
+            return
+          }}).then(()=>{
+           return Location.getCurrentPositionAsync({});
+          }).then((response)=>{
+            setUserLocation(response);
+            setLocationLoading(false)
+          })}
+      , []);
+
+      let text = 'Waiting..';
+      if (errorMsg) {
+        text = errorMsg;
+      } else if (userLocation) {
+        text = JSON.stringify(userLocation);
+      }
+
+      if (!locationLoading) {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={NavigationBar} options={{ headerShown: false }} initialParams={{ user }} />
+        <Stack.Screen name="Main" component={NavigationBar} options={{ headerShown: false }} initialParams={{ user, userLocation}} />
         <Stack.Screen name="Single Location" component={SingleLocation}   
         options={{headerTitle: '', headerTransparent: true}}
         />
@@ -30,4 +58,5 @@ export default function App() {
       </Stack.Navigator>
     </NavigationContainer>
   );
+}
 }
