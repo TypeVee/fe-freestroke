@@ -1,13 +1,14 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
+import { getFirestore } from 'firebase/firestore'
 import 'react-native-get-random-values';
 const uuid = require('uuid')
-import {firebaseConfig} from './firebaseconfig'
+import {firebaseConfig} from './fbconfig'
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)
-
+const db = getFirestore(app)
 
 //Functions
 async function handleImagePicked(ImageUri) {
@@ -41,4 +42,4 @@ const uploadImage = async function (ImageUri){
         resolve(url)}))
     }
 
-module.exports = { initializeApp, uploadImage, auth}
+module.exports = { initializeApp, uploadImage, auth, db}
