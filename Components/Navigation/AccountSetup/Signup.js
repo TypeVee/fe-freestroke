@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
 import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import {db} from "../../../localDatabase/firebase"
 
 
 const Signup = () => {
@@ -17,6 +18,13 @@ const Signup = () => {
           displayName: displayName,
         })
         console.log(userCredential);
+      })
+      .then(() => {
+        const user = auth.currentUser;
+        return db.collection('users').doc(user.uid).set({
+          displayName: displayName,
+          email: email,
+        });
       })
       .catch((error) => {
         console.log(error);

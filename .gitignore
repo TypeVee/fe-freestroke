@@ -4,6 +4,7 @@
 # dependencies
 node_modules/
 localDatabase/fbConfig.js
+localDatabase/fbconfig.js
 
 # Expo
 .expo/
@@ -35,3 +36,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# firebase
+localDatabase/fbconfig.js

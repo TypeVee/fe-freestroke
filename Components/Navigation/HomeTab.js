@@ -1,11 +1,13 @@
 import { StyleSheet, Text, View } from 'react-native';
 import {AddLocationHome, AllLocations , NearbyTopLocations }from '../Locations/index';
 import SwimmingAdvice from '../index';
+import { useUser } from '../Navigation/AccountSetup/UserContext';
 
 
 
 export default function HomeTab({navigation, route}) {
-
+  const user = useUser();
+  console.log("HELLO", user);
   const {userLocation} = route.params
   console.log(userLocation, 'home')
 
