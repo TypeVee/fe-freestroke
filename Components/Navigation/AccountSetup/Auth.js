@@ -38,8 +38,6 @@ const AuthDetails = () => {
     <View>
       {user ? (
         <>
-          <Text>{`Signed in as ${user.displayName}`}</Text>
-          {user.displayName && <Text>{`Display Name: ${user.displayName}`}</Text>}
           <Button title="Sign Out" onPress={userSignOut} />
         </>
       ) : (
