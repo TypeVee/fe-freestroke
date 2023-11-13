@@ -15,7 +15,7 @@ export const getReviewsById = (location_id, page) =>{
             p: page
         },
     };
-    
+
     return freeStrokeAPI.get(`/locations/${location_id}/reviews`, query)
     .then(({data}) =>{
         return data
@@ -31,12 +31,11 @@ export const postReview = (location_id, reviewToBeAdded) => {
 }
 
 export const patchLikes = (value, review_id) => {
-    console.log(value, '<<<value')
     return freeStrokeAPI.patch(`/reviews/${review_id}`, {inc_votes: value})
 }
 
 export const getLocations = () => {
-    return freeStrokeAPI.get(`/locations?limit=500`).then ((res) => {
+    return freeStrokeAPI.get(`/locations?limit=1000`).then ((res) => {
         return res.data
     })
 }

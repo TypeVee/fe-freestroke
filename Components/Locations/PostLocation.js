@@ -13,7 +13,7 @@ export default function PostLocation ({route}) {
     const [imageURI, setImageURI] = useState()
     
     const selectImage = async function (){
-       const tempImage = await ImagePicker.launchImageLibraryAsync({
+        const tempImage = await ImagePicker.launchImageLibraryAsync({
         quality: 1,
       })
       
@@ -75,7 +75,7 @@ export default function PostLocation ({route}) {
         value={area}
         onChangeText={handleAreaChange}
       />   
-       <TextInput
+        <TextInput
         style={[styles.TextInput, { height: 100 }]}
         placeholder="Location Description"
         value={locationDescription}

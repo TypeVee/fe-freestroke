@@ -38,3 +38,4 @@ yarn-error.*
 # firebase
 localDatabase/fbConfig.js
 localDatabase/fbconfig.js
+localDatabase/fbConfig.js

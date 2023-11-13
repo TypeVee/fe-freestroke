@@ -6,6 +6,7 @@ import SavedFilled from '../../assets/SavedFilled.jpeg'
 
 export default function SingleLocationContainer({ location, reviewCount, averageRating }) {
   const [savedClicked, setSavedClicked] = useState(false)
+  const [visitedClicked, setVisitedClicked] = useState(false)
 
   const waterDate = new Date(location.water_classification_date);
 
@@ -21,15 +22,12 @@ export default function SingleLocationContainer({ location, reviewCount, average
   }
 
   const handleDirections = () => {
-    // If we want this
+    // Millie to do
   }
 
-  const handleShare = () => {
-    // If we want this
-  }
-
-  const handleDownload = () => {
-    // If we want this
+  const handleVisited = () => {
+    setVisitedClicked(!visitedClicked)
+    // Visited button
   }
   
   return (
@@ -56,13 +54,13 @@ export default function SingleLocationContainer({ location, reviewCount, average
       <Image source={{ uri: location.location_img_url }} style={{ width: 350, height: 250 }} />
       <View style={styles.directionsShare}>
         <TouchableOpacity onPress={handleDirections}>
-          <Text style={styles.textDirectionsShare}>&nbsp;&nbsp;Directions</Text>
+          <Text style={styles.textDirectionsShare}>&nbsp;&nbsp;Click for directions</Text>
         </TouchableOpacity>
-        <TouchableOpacity onPress={handleShare}>
-          <Text style={styles.textDirectionsShare}>Share</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={handleDownload}>
-          <Text style={styles.textDirectionsShare}>Download&nbsp;&nbsp;</Text>
+      </View>
+
+      <View style={visitedClicked ? styles.visitedClicked : styles.visited}>
+        <TouchableOpacity onPress={handleVisited}>
+          <Text style={styles.textVisited}>{visitedClicked ? 'Visited' : 'Visited?'}</Text>
         </TouchableOpacity>
       </View>
 
@@ -101,7 +99,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     alignSelf: 'flex-start',
     width: 350,
-    marginLeft: 22,
+    marginLeft: 21,
     paddingBottom: 5,
     paddingTop: 5,
     backgroundColor: '#A8DCFA'
@@ -111,15 +109,43 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#1937E0'
   },
+  visited: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    marginRight: 22,
+    borderRadius: 3,
+    borderColor: 'black',
+    padding: 5,
+    borderWidth: 1,
+    marginTop: 5,
+    backgroundColor: '#C3C3C3'
+  },
+  visitedClicked: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-end',
+    marginRight: 22,
+    borderRadius: 3,
+    borderColor: 'black',
+    padding: 5,
+    borderWidth: 1,
+    marginTop: 5,
+    backgroundColor: 'grey'
+  },
+  textVisited: {
+    fontSize: 14,
+    fontWeight: 'bold'
+  },
   infoContainer: {
-    marginTop: 20,
     alignSelf: 'flex-start',
-    marginHorizontal: 20,
+    marginHorizontal: 20
   },
   waterQualityContainer: {
-    marginTop: 20,
+    marginTop: 10,
     alignSelf: 'flex-start',
     marginHorizontal: 20,
+    marginBottom: 10
   },
   ratingContainer: {
     flexDirection: 'row',

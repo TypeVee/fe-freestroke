@@ -1,11 +1,23 @@
 import { StyleSheet, View, Pressable } from 'react-native';
 import Icon from 'react-native-ico-material-design';
+import { useUser } from '../Navigation/AccountSetup/UserContext';
 
 export default function AddLocationButton({navigation}) {
+
 
     const handlePress = () => {
        navigation.navigate('Add Location Map'); 
       };
+
+const user = useUser();
+const handlePress = () => {
+  if (user) {
+    navigation.navigate('Add Location Map');
+  } else {
+    navigation.navigate("Log in");
+  }
+};
+
 
     return (
       <View style={{position: 'absolute', top: 180, right:40}}>
