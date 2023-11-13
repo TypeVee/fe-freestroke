@@ -42,6 +42,7 @@ getLocations()
           
   {locationData.map((location)=>{
 
+
          const string = JSON.stringify(location)
          const parsed = JSON.parse(string)
 
@@ -50,12 +51,10 @@ getLocations()
           coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}  >
             <Callout>
               
-              <Text>
-                <Image source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
-                style={{ width: 100, height: 100}}
-                resizeMode="cover"
-                />
+            <Text style={{fontWeight: "bold"}}>
+               {parsed.location_name}
             </Text>
+            
             </Callout>
             </Marker>
           })}
