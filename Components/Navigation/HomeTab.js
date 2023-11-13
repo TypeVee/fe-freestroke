@@ -1,5 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
-import {AddLocationHome, AllLocations , NearbyTopLocations }from '../Locations/index';
+import { StyleSheet, Text, View , Button} from 'react-native';
+import {AddLocationHome, TopLocations , NearbyLocations }from '../Locations/index';
 import SwimmingAdvice from '../index';
 import { useUser } from '../Navigation/AccountSetup/UserContext';
 
@@ -13,8 +13,9 @@ export default function HomeTab({navigation, route}) {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Home!</Text>
-        <NearbyTopLocations navigation={navigation}/>
-        <AllLocations  navigation={navigation}/>
+        <NearbyLocations navigation={navigation}/>
+        <TopLocations  navigation={navigation}/>
+        <Button title="All Locations"> </Button>
         <SwimmingAdvice />
         <AddLocationHome navigation={navigation}/>
       </View>

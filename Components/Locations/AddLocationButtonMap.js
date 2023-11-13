@@ -5,10 +5,6 @@ import { useUser } from '../Navigation/AccountSetup/UserContext';
 export default function AddLocationButton({navigation}) {
 
 
-    const handlePress = () => {
-       navigation.navigate('Add Location Map'); 
-      };
-
 const user = useUser();
 const handlePress = () => {
   if (user) {

@@ -1,8 +1,8 @@
 import AddLocationButton from "./AddLocationButtonMap"
 import AddLocationHome from "./AddLocationHome"
-import AllLocations from "./AllLocations"
-import NearbyTopLocations from "./NearbyTopLocations"
+import TopLocations from "./TopLocations"
+import NearbyLocations from "./NearbyLocations"
 import SingleLocation from "./SingleLocation"
 
 
-export { AllLocations, NearbyTopLocations , AddLocationHome , AddLocationButton, SingleLocation}
+export { TopLocations, NearbyLocations , AddLocationHome , AddLocationButton, SingleLocation}
