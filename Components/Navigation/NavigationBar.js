@@ -1,14 +1,14 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { HomeScreen, MyAccount, Map, Saved, MainComponent } from './index';
 import Icon from 'react-native-ico-material-design';
-
+import { useUser } from '../Navigation/AccountSetup/UserContext';
 
 const Tab = createBottomTabNavigator();
 
 
 export default function NavigationBar({route}) {
-
- const {userLocation, user} = route.params
+  const user = useUser();
+ const {userLocation} = route.params
 
   return (
     <Tab.Navigator initialRouteName='Home' screenOptions={{
