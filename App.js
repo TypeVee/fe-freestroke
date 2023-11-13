@@ -9,6 +9,7 @@ import AddLocationMap from './Components/Maps';
 import PostLocation from './Components/Locations/PostLocation';
 import AuthDetails from './Components/Navigation/AccountSetup/Auth';
 import { useState, useEffect } from 'react';
+import { UserProvider } from './Components/Navigation/AccountSetup/UserContext';
 import * as Location from 'expo-location';
 
 
@@ -44,6 +45,7 @@ export default function App() {
 
       if (!locationLoading) {
   return (
+    <UserProvider>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen name="Main" component={NavigationBar} options={{ headerShown: false }} initialParams={{ user, userLocation}} />
@@ -57,6 +59,7 @@ export default function App() {
         <Stack.Screen name="Auth Details" component={AuthDetails} initialParams={{ user, setUser }}/>
       </Stack.Navigator>
     </NavigationContainer>
+    </UserProvider>
   );
 }
 }
