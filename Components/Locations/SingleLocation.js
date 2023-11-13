@@ -4,8 +4,9 @@ import ReviewContainer from '../Reviews/index';
 import React, { useEffect, useState } from 'react';
 import { getLocationByID } from '../../api';
 
-export default function SingleLocation() {
-    const location_id = 3;
+export default function SingleLocation({route}) {
+
+    const location_id = route.params;  
     const [location, setLocation] = useState({});
     const [reviewCount, setReviewCount] = useState(0)
     const [averageRating, setAverageRating] = useState(0)

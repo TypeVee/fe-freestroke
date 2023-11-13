@@ -4,7 +4,7 @@ import Icon from 'react-native-ico-material-design';
 export default function AddLocationButton({navigation}) {
 
     const handlePress = () => {
-        navigation.navigate('Add Location Map');
+       navigation.navigate('Add Location Map'); 
       };
 
     return (

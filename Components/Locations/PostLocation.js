@@ -43,6 +43,12 @@ export default function PostLocation ({route}) {
         setLocationDescription(input)
       }
 
+
+
+
+
+
+
     const submitLocation = function (){
         if(!imageURI || !locationName || !area || !locationDescription){
           alert('Please fill in all information')
@@ -50,6 +56,7 @@ export default function PostLocation ({route}) {
         }
         uploadImage(imageURI).then((url)=>{
         console.log({'uid': "???", "location_name":locationName,'location_area': area, 'body': locationDescription, 'location_img_url': url, 'coordinates':draggableLocation})
+        
     })
     }
 
