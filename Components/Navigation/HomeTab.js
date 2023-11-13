@@ -7,7 +7,6 @@ import { useUser } from '../Navigation/AccountSetup/UserContext';
 
 export default function HomeTab({navigation, route}) {
   const user = useUser();
-  console.log("HELLO", user);
   const {userLocation} = route.params
   console.log(userLocation, 'home')
 
