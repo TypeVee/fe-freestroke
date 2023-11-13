@@ -4,7 +4,7 @@ import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore } from 'firebase/firestore'
 import 'react-native-get-random-values';
 const uuid = require('uuid')
-import {firebaseConfig} from './fbconfig'
+import {firebaseConfig} from './fbConfig'
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app)

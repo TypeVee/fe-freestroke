@@ -3,6 +3,12 @@ import Icon from 'react-native-ico-material-design';
 import { useUser } from '../Navigation/AccountSetup/UserContext';
 
 export default function AddLocationButton({navigation}) {
+
+
+    const handlePress = () => {
+       navigation.navigate('Add Location Map'); 
+      };
+
 const user = useUser();
 const handlePress = () => {
   if (user) {
@@ -11,6 +17,7 @@ const handlePress = () => {
     navigation.navigate("Log in");
   }
 };
+
 
     return (
       <View style={{position: 'absolute', top: 180, right:40}}>
