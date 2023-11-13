@@ -34,3 +34,9 @@ export const patchLikes = (value, review_id) => {
     console.log(value, '<<<value')
     return freeStrokeAPI.patch(`/reviews/${review_id}`, {inc_votes: value})
 }
+
+export const getLocations = () => {
+    return freeStrokeAPI.get(`/locations?limit=500`).then ((res) => {
+        return res.data
+    })
+}

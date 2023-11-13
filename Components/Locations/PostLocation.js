@@ -1,12 +1,34 @@
-import { StyleSheet, Text, View, TextInput, Button} from 'react-native';
+import { StyleSheet, Text, View, TextInput, Button, Image, TouchableHighlight} from 'react-native';
 import { useState } from 'react';
+import * as ImagePicker from "expo-image-picker";
+import { uploadImage} from "../../localDatabase/firebase";
 
-export default function PostLocation () {
+export default function PostLocation ({route}) {
+
+    const {draggableLocation} = route.params
 
     const [locationName, setLocationName] = useState('');
     const [area, setArea] = useState('')
     const [locationDescription, setLocationDescription] = useState('')
+    const [imageURI, setImageURI] = useState()
     
+    const selectImage = async function (){
+       const tempImage = await ImagePicker.launchImageLibraryAsync({
+        quality: 1,
+      })
+      
+      setImageURI(tempImage.assets[0].uri)
+    }
+
+    async function requestClientPerms() {
+      if (Platform.OS !== "web") {
+        const {status} = await ImagePicker.requestMediaLibraryPermissionsAsync();
+        if (status !== "granted") {
+          alert("Sorry, we need camera roll permissions to upload swimspots");
+        }
+      }
+    }
+    requestClientPerms()
 
     const handleLocationNameChange = (input) => {
         setLocationName(input);
@@ -15,20 +37,22 @@ export default function PostLocation () {
     const handleAreaChange = (input) => {
         setArea(input)
       }
-
-
+    
+      
     const handleLocationDescriptionChange = (input) => {
         setLocationDescription(input)
       }
 
-    const submitLocation = () => {
-
-      
-        console.log('Location Name:', locationName)
-        console.log('Area:', area)
-        console.log('Location Description:', locationDescription)   
+    const submitLocation = function (){
+        if(!imageURI || !locationName || !area || !locationDescription){
+          alert('Please fill in all information')
+          return
+        }
+        uploadImage(imageURI).then((url)=>{
+        console.log({'uid': "???", "location_name":locationName,'location_area': area, 'body': locationDescription, 'location_img_url': url, 'coordinates':draggableLocation})
+    })
     }
-    
+
     return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Enter Location details:</Text>
@@ -53,6 +77,11 @@ export default function PostLocation () {
         numberOfLines={4}
         textAlignVertical="top"
       />
+      {}
+        <TouchableHighlight onPress={()=>setImageURI()}>
+          <Image source={{uri: (imageURI !== undefined ? imageURI : undefined)}} style={{width:100, height:100}}/>
+        </TouchableHighlight>
+      <Button title="Upload Image" onPress={selectImage}/>
       <Button title="Submit" onPress={submitLocation} />
     </View>
     )

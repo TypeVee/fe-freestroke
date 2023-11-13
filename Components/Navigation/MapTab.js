@@ -1,37 +1,33 @@
-import {  Button, StyleSheet, View } from 'react-native';
+import {  StyleSheet, View ,Text, Image} from 'react-native';
 import { AddLocationButton } from '../Locations';
-import MapView from 'react-native-maps';
-import * as Location from 'expo-location';
+import MapView, { Callout, Marker } from 'react-native-maps';
 import { useEffect, useState } from 'react';
+import { getLocations } from '../../api';
 
 
 export default function MapTab({navigation}) {
 
-  const [location, setLocation] = useState(null);
-  const [errorMsg, setErrorMsg] = useState(null);
+  const [locationData, setLocationData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
 
-Location.requestForegroundPermissionsAsync().then((status)=>{
-if (status !== 'granted') {
-        setErrorMsg('Permission to access location was denied');
-        return
-      }}).then(()=>{
-       return Location.getCurrentPositionAsync({});
-      }).then((location)=>{
-        setLocation(location);
-      })}
-  , []);
+  useEffect(()=>{
+getLocations()
+.then(({locations})=>{
+  setLocationData(locations)
+  setLoading(false)
+})
+  },[])
 
-  let text = 'Waiting..';
-  if (errorMsg) {
-    text = errorMsg;
-  } else if (location) {
-    text = JSON.stringify(location);
+  if (loading) {
+    return (
+      <View>
+        <Text>Loading...</Text>
+      </View>
+    )
   }
 
-  
-    return (
+  return (
 
         <View style={styles.container}>
         <MapView 
@@ -43,11 +39,37 @@ if (status !== 'granted') {
             longitudeDelta: 13,
         }}
         showsUserLocation={true}>
-        </MapView>
+          
+  {locationData.map((location)=>{
+
+         const string = JSON.stringify(location)
+         const parsed = JSON.parse(string)
+
+           return  <Marker 
+          key={parsed.id}
+          coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}  >
+            <Callout>
+              
+              <Text>
+                <Image source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
+                style={{ width: 100, height: 100}}
+                resizeMode="cover"
+                />
+            </Text>
+            </Callout>
+            </Marker>
+          })}
+      
+      </MapView>
+ 
         <AddLocationButton navigation={navigation}/>
       </View>
-
+    
+  
     )
+
+
+
 }
 
 const styles = StyleSheet.create({

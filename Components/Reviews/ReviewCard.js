@@ -13,7 +13,16 @@ export default function ReviewCard ({ review_id, body, username, rating_for_loca
     
     let timeAgo = '';
     if (Date.parse(created_at)) {
-        timeAgo = moment(created_at).fromNow()
+        const now = moment();
+        const createdAtMoment = moment(created_at);
+        
+        const secondsDiff = now.diff(createdAtMoment, 'seconds');
+        
+        if (secondsDiff < 5) {
+            timeAgo = 'a few seconds ago';
+            } else {
+            timeAgo = createdAtMoment.fromNow();
+        }
     }
 
     const handleDelete = () => {

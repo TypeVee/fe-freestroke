@@ -4,7 +4,11 @@ import SwimmingAdvice from '../index';
 
 
 
-export default function HomeTab({navigation}) {
+export default function HomeTab({navigation, route}) {
+
+  const {userLocation} = route.params
+  console.log(userLocation, 'home')
+
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
         <Text>Home!</Text>

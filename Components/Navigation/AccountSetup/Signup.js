@@ -1,15 +1,21 @@
 import React, { useState } from 'react';
 import { View, Text, TextInput, Button } from 'react-native';
-import { getAuth, createUserWithEmailAndPassword } from 'firebase/auth';
+import { getAuth, createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 const Signup = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [displayName, setDisplayName] = useState('');
 
   const signUp = () => {
     const auth = getAuth();
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
+        updateProfile(userCredential.user, {
+          displayName: displayName,
+        })
         console.log(userCredential);
       })
       .catch((error) => {
@@ -30,6 +36,11 @@ const Signup = () => {
         value={password}
         onChangeText={(text) => setPassword(text)}
         secureTextEntry={true}
+      />
+            <TextInput
+        placeholder="Enter your display name"
+        value={displayName}
+        onChangeText={(text) => setDisplayName(text)}
       />
       <Button
         title="Sign Up"
