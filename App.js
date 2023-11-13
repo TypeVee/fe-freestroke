@@ -46,7 +46,7 @@ export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Main" component={NavigationBar} options={{ headerShown: false }} initialParams={{ user, setUser, userLocation}} />
+        <Stack.Screen name="Main" component={NavigationBar} options={{ headerShown: false }} initialParams={{ user, userLocation}} />
         <Stack.Screen name="Single Location" component={SingleLocation}   
         options={{headerTitle: '', headerTransparent: true}}
         />

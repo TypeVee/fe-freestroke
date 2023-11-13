@@ -1,6 +1,6 @@
-import {  StyleSheet, View ,Text} from 'react-native';
+import {  StyleSheet, View ,Text, Image} from 'react-native';
 import { AddLocationButton } from '../Locations';
-import MapView, { Marker } from 'react-native-maps';
+import MapView, { Callout, Marker } from 'react-native-maps';
 import { useEffect, useState } from 'react';
 import { getLocations } from '../../api';
 
@@ -46,9 +46,18 @@ getLocations()
          const parsed = JSON.parse(string)
 
            return  <Marker 
-           key={parsed.id}
-           coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}/>
-        
+          key={parsed.id}
+          coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}  >
+            <Callout>
+              
+              <Text>
+                <Image source={{ uri: 'https://facebook.github.io/react/logo-og.png' }}
+                style={{ width: 100, height: 100}}
+                resizeMode="cover"
+                />
+            </Text>
+            </Callout>
+            </Marker>
           })}
       
       </MapView>

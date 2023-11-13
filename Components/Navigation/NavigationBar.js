@@ -8,7 +8,6 @@ const Tab = createBottomTabNavigator();
 
 export default function NavigationBar({route}) {
 
-  console.log(route.params)
  const {userLocation, user} = route.params
 
   return (
