@@ -65,28 +65,3 @@ return (
 
 
 
-
-
-// console.log(closestLocations,"CLOSEST LOCATIONS")
-//     return (
-//     <ScrollView>
-//      { closestLocations.map((location)=>{
-// <LocationCard 
-// location_id = {location.location_id}
-
-// />
-//       })}
-//     </ScrollView>
-//     );
-//   }
-
-
-//   <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-//   <Text>Nearby top locations!</Text>
-//   {
-    
-//   }
-//   <LocationCard navigation={navigation} 
-//   // location_id={location_id}
-//   />
-// </View>
