@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, Text, View, Button, Image, ScrollView } from 'react-native';
+import { StyleSheet, Text, View, Button, Image, ScrollView,ImageBackground } from 'react-native';
 import { useEffect, useState } from 'react';
 import { getLocations } from '../../api';
 
@@ -42,6 +42,10 @@ export default function AllLocations({ navigation }) {
   };
 
   return (
+    <ImageBackground
+    source={{ uri: 'https://imagetolink.com/ib/oUhEves5qz.png' }}
+    style={styles.backgroundImage}
+  >
     <View style={styles.container}>
       <ScrollView style={styles.scrollView}>
         {loading ? (
@@ -62,7 +66,8 @@ export default function AllLocations({ navigation }) {
               {location.water_classification_date && (
                 <Text style={styles.locationInfo}>{`Water Classification Date: ${location.water_classification_date}`}</Text>
               )}
-              <Button title="More" onPress={() => navigation.navigate('Single Location')} />
+              <Button title="More" onPress={() => navigation.navigate('Single Location', location.location_id)}
+              style={styles.moreButton} />
             </View>
           ))
         )}
@@ -74,6 +79,7 @@ export default function AllLocations({ navigation }) {
         )}
       </ScrollView>
     </View>
+    </ImageBackground>
   );
 }
 
@@ -82,36 +88,49 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: 'transparent',
+    paddingTop: 10
   },
   scrollView: {
     marginBottom: 20,
   },
   locationCard: {
     marginBottom: 20,
-    backgroundColor: '#fff',
-    padding: 10,
+    backgroundColor: 'rgba(0, 0, 70, 0.5)',
+    padding: 20,
     borderRadius: 8,
-    elevation: 2, // Add elevation for Android shadow
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
+    elevation: 2, 
+    alignItems: 'center',
   },
   locationName: {
-    fontSize: 18,
+    fontSize: 22,
     fontWeight: 'bold',
     marginBottom: 5,
+    color: '#fff'
   },
   locationImage: {
     width: 300,
     height: 200,
     resizeMode: 'cover',
     marginBottom: 10,
+    alignContent: 'center',
+    borderRadius: 10
   },
   locationInfo: {
     marginBottom: 5,
+    fontWeight: 'bold',
+    color: '#fff'
   },
   button: {
     marginVertical: 10,
+    color: '#fff',
+    backgroundColor: 'rgb(0,0,0)'
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover', 
+  },
+  moreButton: {
+    color: '#fff', 
   },
 });
