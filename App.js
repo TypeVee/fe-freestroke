@@ -16,6 +16,9 @@ import Signup from './Components/Navigation/AccountSetup/Signup';
 import AllLocations from './Components/Locations/AllLocations';
 
 
+import {createLocationTable, wipe} from './localDatabase/database'
+
+
 const Stack = createStackNavigator();
 
 export default function App() {
@@ -26,7 +29,7 @@ export default function App() {
   const [locationLoading, setLocationLoading] = useState(true);
   
   useEffect(() => {
-
+    createLocationTable() //DELETE WIPE ON FINAL RELEASE
     Location.requestForegroundPermissionsAsync().then((status)=>{
     if (status !== 'granted') {
             setErrorMsg('Permission to access location was denied');
