@@ -16,8 +16,8 @@ const userLongitude = userLocation.coords.longitude
 
   useEffect(()=>{
 getLocations().then(({locations})=>{
-  setLocationData(locations)
-  const allLocationsDistance = locationData.map((location)=>{
+
+  const allLocationsDistance = locations.map((location)=>{
 
     const locationCopy = {...location}
   
@@ -29,6 +29,7 @@ getLocations().then(({locations})=>{
   return locationCopy
   
   })
+
   const sortedLocations = allLocationsDistance.sort((a,b)=>a.distance-b.distance)
   
   setClosestLocations(sortedLocations.slice(0,20))
@@ -44,18 +45,22 @@ if (loadingNearbyLocations) {
     </View>
   )
 } 
-
+console.log(loadingNearbyLocations)
 console.log(closestLocations,"CLOSEST LOCATIONS")
 return (
-<ScrollView>
- { closestLocations.map((location)=>{
-  {console.log(location.location_id,"<<<<<HERE")}
-<LocationCard 
-navigation={navigation}
-location_id= {location.location_id}
 
-/>
-  })}
+<ScrollView horizontal={true} style={{ flexDirection: 'row' }}>
+{closestLocations.map((location) => {
+   return <LocationCard
+    key={location._id}
+    navigation={navigation}
+    location_id={location.location_id}
+    location_name={location.location_name}
+    location_img_url={location.location_img_url}
+    distance={location.distance}
+  />
+})}
+
 </ScrollView>
 );
 }

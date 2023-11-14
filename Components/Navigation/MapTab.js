@@ -52,7 +52,7 @@ getLocations()
          const parsed = JSON.parse(string)
   
            return  <Marker
-          key={parsed.id}
+          key={parsed._id}
           coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}  >
           
             <Callout onPress={(e) => handleMarkerPress(parsed.location_id)}>
