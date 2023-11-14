@@ -62,7 +62,7 @@ export default function AllLocations({ navigation }) {
               {location.water_classification_date && (
                 <Text style={styles.locationInfo}>{`Water Classification Date: ${location.water_classification_date}`}</Text>
               )}
-              <Button title="More" onPress={() => navigation.navigate('single Location')} />
+              <Button title="More" onPress={() => navigation.navigate('Single Location')} />
             </View>
           ))
         )}

@@ -3,7 +3,7 @@ import { getAuth } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore } from 'firebase/firestore'
 import 'react-native-get-random-values';
-import { firebaseConfig } from './fbConfig';
+import { firebaseConfig } from './fbconfig';
 
 
 const app = initializeApp(firebaseConfig);
