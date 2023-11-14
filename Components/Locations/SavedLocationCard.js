@@ -1,19 +1,20 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 import SingleLocation from './SingleLocation';
-import {fetch, saveLocation, createLocationTable} from '../../localDatabase/database'
 
-export default function SavedLocationCard({navigation}) {
+
+export default function SavedLocationCard({navigation, location}) {
   
-  fetch('savedLocations').then((res)=>{console.log(res)})
   const handlePress = () => {
-    navigation.navigate('Single Location');}
+    navigation.navigate('Single Location', location.location_id);}
 
     return (
-
-      <TouchableOpacity 
-      onPress={handlePress}
-      style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Saved Location Card!</Text>
-      </TouchableOpacity>
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <TouchableOpacity 
+        onPress={handlePress}
+        style={{ width:300, borderWidth: 3, BorderColor: 'rgb(0, 0, 0)', textAlign: 'center' }}>
+          <Text style={{color:"black", textAlign: 'center'}}>{location.location_name}</Text>
+          <Text style={{color:"grey", textAlign: 'center'}}>{location.location_area}</Text>
+        </TouchableOpacity>
+      </View>
     );
   }
