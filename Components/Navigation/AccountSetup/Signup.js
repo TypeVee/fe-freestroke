@@ -17,7 +17,6 @@ const Signup = () => {
         updateProfile(userCredential.user, {
           displayName: displayName,
         })
-        console.log(userCredential);
       })
       .then(() => {
         const user = auth.currentUser;

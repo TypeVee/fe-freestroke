@@ -45,6 +45,12 @@ export default function PostLocation ({route}) {
         setLocationDescription(input)
       }
 
+
+
+
+
+
+
     const submitLocation = function (){
         if(!imageURI || !locationName || !area || !locationDescription){
           alert('Please fill in all information')
