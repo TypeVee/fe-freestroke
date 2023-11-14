@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
 import { StarRating } from './StarRating';
 import SavedUnfilled from '../../assets/Saved.jpeg'
 import SavedFilled from '../../assets/SavedFilled.jpeg'
+import {saveLocation, unsaveLocation, findID} from '../../localDatabase/database.js'
 
 export default function SingleLocationContainer({ location, reviewCount, averageRating }) {
   const [savedClicked, setSavedClicked] = useState(false)
@@ -16,9 +17,28 @@ export default function SingleLocationContainer({ location, reviewCount, average
     year: 'numeric',
   });
 
+  useEffect(()=>{
+    findID(location.location_id).then((res)=>{
+      if(JSON.parse(res).length === 1){
+        console.log
+        setSavedClicked(true)
+      } else setSavedClicked(false)
+    })
+  }, [])
+
   const handleSave = () => {
-    setSavedClicked(!savedClicked)
-    // @Vee - Logic here for saving location. location_id is location.location_id
+    if(savedClicked === false){
+      saveLocation(location).then((res)=>{
+        setSavedClicked(true)
+      })
+      
+    }
+    else {
+      unsaveLocation(location.location_id).then((res)=>{
+        setSavedClicked(false)
+      })
+      
+    }
   }
 
   const handleDirections = () => {

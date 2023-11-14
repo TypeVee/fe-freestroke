@@ -13,7 +13,7 @@ import { UserProvider } from './Components/Navigation/AccountSetup/UserContext';
 import * as Location from 'expo-location';
 import { MainComponent } from './Components/Navigation';
 import Signup from './Components/Navigation/AccountSetup/Signup';
-
+import {createLocationTable, wipe} from './localDatabase/database'
 
 const Stack = createStackNavigator();
 
@@ -25,7 +25,7 @@ export default function App() {
   const [locationLoading, setLocationLoading] = useState(true);
   
   useEffect(() => {
-
+    createLocationTable() //DELETE WIPE ON FINAL RELEASE
     Location.requestForegroundPermissionsAsync().then((status)=>{
     if (status !== 'granted') {
             setErrorMsg('Permission to access location was denied');
