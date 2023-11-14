@@ -39,3 +39,7 @@ export const getLocations = () => {
         return res.data
     })
 }
+
+export const postLocation = (locationToBeAdded) => {
+    return freeStrokeAPI.post(`/locations`, locationToBeAdded)
+}
