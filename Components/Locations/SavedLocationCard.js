@@ -1,6 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import SingleLocation from './SingleLocation';
-import {db, fetch, saveLocation, createLocationTable} from '../../localDatabase/database'
+import {fetch, saveLocation, createLocationTable} from '../../localDatabase/database'
 
 export default function SavedLocationCard({navigation}) {
   

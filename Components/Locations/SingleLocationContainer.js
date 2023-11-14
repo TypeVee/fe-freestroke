@@ -5,8 +5,8 @@ import SavedUnfilled from '../../assets/Saved.jpeg'
 import SavedFilled from '../../assets/SavedFilled.jpeg'
 import {saveLocation, unsaveLocation, findID} from '../../localDatabase/database.js'
 
-export default function SingleLocationContainer({ location, reviewCount, averageRating }) {
-  const [savedClicked, setSavedClicked] = useState(false)
+export default function SingleLocationContainer({ location, reviewCount, averageRating, saved }) {
+  const [savedClicked, setSavedClicked] = useState((saved ? true : false))
   const [visitedClicked, setVisitedClicked] = useState(false)
 
   const waterDate = new Date(location.water_classification_date);
@@ -17,15 +17,6 @@ export default function SingleLocationContainer({ location, reviewCount, average
     year: 'numeric',
   });
 
-  useEffect(()=>{
-    findID(location.location_id).then((res)=>{
-      if(JSON.parse(res).length === 1){
-        console.log
-        setSavedClicked(true)
-      } else setSavedClicked(false)
-    })
-  }, [])
-
   const handleSave = () => {
     if(savedClicked === false){
       saveLocation(location).then((res)=>{
@@ -34,7 +25,7 @@ export default function SingleLocationContainer({ location, reviewCount, average
       
     }
     else {
-      unsaveLocation(location.location_id).then((res)=>{
+      unsaveLocation(location.location_id).then(()=>{
         setSavedClicked(false)
       })
       
