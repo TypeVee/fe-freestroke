@@ -8,7 +8,6 @@ import { ScrollView } from 'react-native-gesture-handler';
 export default function NearbyLocations({navigation , userLocation}) {
 
   const [closestLocations, setClosestLocations] = useState([])
-  const [locationData, setLocationData] = useState([]);
   const [loadingNearbyLocations, setLoadingNearbyLocations] = useState(true);
   
 const userLatitude = userLocation.coords.latitude
@@ -45,11 +44,9 @@ if (loadingNearbyLocations) {
     </View>
   )
 } 
-console.log(loadingNearbyLocations)
-console.log(closestLocations,"CLOSEST LOCATIONS")
-return (
 
-<ScrollView horizontal={true} style={{ flexDirection: 'row' }}>
+return (
+<ScrollView horizontal={true} style={{ flexDirection: 'row', margin: 10}}>
 {closestLocations.map((location) => {
    return <LocationCard
     key={location._id}
@@ -60,7 +57,6 @@ return (
     distance={location.distance}
   />
 })}
-
 </ScrollView>
 );
 }
