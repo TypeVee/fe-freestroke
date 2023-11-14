@@ -6,16 +6,22 @@ import { useUser } from '../Navigation/AccountSetup/UserContext';
 
 
 export default function HomeTab({navigation, route}) {
-  const user = useUser();
+
+ const user = useUser();
   const {userLocation} = route.params
+
+  function handlePress () {
+    navigation.navigate('All Locations')
+  }
   console.log(userLocation, 'home')
   console.log(userLocation.coords.latitude,"<<<<<<<")
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Home!</Text>
+        <Text>Nearby Locations</Text>
         <NearbyLocations navigation={navigation} userLocation={userLocation}/>
+        <Text>Top Rated Locations</Text>
         <TopLocations  navigation={navigation}/>
-        <Button title="All Locations"> </Button>
+        <Button onPress={handlePress} title="All Locations"> </Button>
         <SwimmingAdvice />
         <AddLocationHome navigation={navigation}/>
       </View>
