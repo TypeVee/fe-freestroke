@@ -35,5 +35,5 @@ export default function LocationCard({navigation, location_id, distance, locatio
       margin: 10,
       width:100,
       height:100
-    }x
+    }
  })
