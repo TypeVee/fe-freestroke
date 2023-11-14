@@ -5,6 +5,7 @@ import { postReview } from '../../api';
 import addReviewIcon from '../../assets/AddReview.png';
 
 
+
 export default function PostReview({ location_id, reviews, setReviews, reviewCount, setReviewCount, setAverageRating, averageRating}) {
     const [showReviewForm, setShowReviewForm] = useState(false);
     const [reviewText, setReviewText] = useState('');
@@ -13,7 +14,6 @@ export default function PostReview({ location_id, reviews, setReviews, reviewCou
     const [postErr, setPostErr] = useState(false);
     const [isPost, setIsPost] = useState(false);
     const user = 'milbot1992';
-    uid = '111111';
 
     const handlePostReview = () => {
         if (reviewText.trim() !== '') {

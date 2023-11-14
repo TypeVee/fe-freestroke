@@ -38,8 +38,14 @@ async function uploadImageAsync(uri) {
   }
 
 const uploadImage = async function (ImageUri){
-      return new Promise((resolve, reject)=> handleImagePicked(ImageUri).then((url)=>{
+      return new Promise((resolve, reject)=> handleImagePicked(ImageUri)
+      .then((url)=>{
+        console.log(url, '<<<url')
         resolve(url)}))
+      .catch((error) => {
+        console.log('Error handling image:', error);
+        reject(error);
+      });
     }
 
 module.exports = { initializeApp, uploadImage, auth, db}
