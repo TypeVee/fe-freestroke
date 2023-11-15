@@ -1,8 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image } from 'react-native';
 import { patchLikes } from '../../api';
-import thumbsUp from '../../assets/ThumbUp.jpeg';
-import thumbsDown from '../../assets/ThumbDown.jpeg';
+import Icon from 'react-native-ico-material-design';
 
 export default function ReviewVoter({ review_id, votes_for_review }) {
     const [userLikes, setUserLikes] = useState(0);
@@ -29,29 +28,29 @@ export default function ReviewVoter({ review_id, votes_for_review }) {
     return (
         <>
             {!isLikesErr ? (
+                <View style={styles.bottomBanner}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity
                         disabled={userLikes === -1}
                         accessibilityLabel="dislike"
                         onPress={() => {
-                            updateAllLikes(-1)
+                        updateAllLikes(-1);
                         }}
                     >
-                        <Image source={thumbsDown} style={{ width: 20, height: 20, marginTop: 10 }} />
+                        <Icon name="thumb-down-button" color={userLikes === -1 ? '#e0e0e0' : '#4578DE'} />
                     </TouchableOpacity>
-                    <Text style={styles.voteCount}>
-                        {votes_for_review + userLikes}
-                    </Text>
+                    <Text style={styles.voteCount}>{votes_for_review + userLikes}</Text>
                     <TouchableOpacity
                         disabled={userLikes === 1}
                         accessibilityLabel="like"
                         onPress={() => {
-                            updateAllLikes(1);
+                        updateAllLikes(1);
                         }}
                         style={[styles.button, userLikes === 1 && styles.disabledButton]}
                     >
-                        <Image source={thumbsUp} style={{ width: 20, height: 20 }} />
+                        <Icon name="thumb-up-button" color={userLikes === 1 ? '#e0e0e0' : '#4578DE'} />
                     </TouchableOpacity>
+                    </View>
                 </View>
             ) : (
                 <Text>Likes not currently working</Text>
@@ -61,6 +60,10 @@ export default function ReviewVoter({ review_id, votes_for_review }) {
 }
 
 const styles = {
+    bottomBanner: {
+        flexDirection: 'row',
+        alignItems: 'flex-end',
+    },
     buttonContainer: {
         flexDirection: 'row',
         alignItems: 'center',
@@ -68,7 +71,7 @@ const styles = {
         width: 70
     },
     voteCount: {
-        color: '#1937E0', 
+        color: '#4578DE', 
         fontWeight: 'bold', 
         fontSize: 18, 
     },
