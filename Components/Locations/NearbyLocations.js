@@ -51,6 +51,7 @@ return (
    return <LocationCard
     key={location._id}
     navigation={navigation}
+    location_area={location.location_area}
     location_id={location.location_id}
     location_name={location.location_name}
     location_img_url={location.location_img_url}
