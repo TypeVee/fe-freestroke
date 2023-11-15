@@ -21,7 +21,7 @@ export default function LocationCard({navigation, location_id, distance, locatio
         style={styles.image}
         source={{uri: `${location_img_url}` }}
         />
-      
+  
       <View style={styles.textAndReviewContainer} >
       <View style={styles.textContainer}> 
 
@@ -59,10 +59,8 @@ export default function LocationCard({navigation, location_id, distance, locatio
       bottom: 18,
       left: 18,
       paddingRight:50,
-      backgroundColor: 'black',
-      zIndex: 1,
-      opacity: 0.55,
-      borderRadius: 10,
+      backgroundColor: 'rgba(0, 0, 0, 0.5)',
+       borderRadius: 10,
       width: "88%"
    
     },
@@ -70,33 +68,22 @@ export default function LocationCard({navigation, location_id, distance, locatio
       color: 'white',
       fontSize: 18,
       fontWeight: 'bold',
-      zIndex: 2,
       paddingLeft: 12,
       paddingTop: 5,
     },
     textArea: {
       color: 'white',
-     paddingLeft: 12
+     paddingLeft: 12,
     },
     textDistance: {
       color: 'white',
-    
       paddingLeft: 12,
-      paddingBottom: 5
+      paddingBottom: 5,
     },
     starContainer: {
       position: 'absolute',
       bottom: 260,
       right: 30,
     }, 
-    // textAndReviewContainer: {
-    //   backgroundColor: 'black',
-    //   zIndex: 1,
-    //   position: 'absolute',
-    //   top: 0,
-    //   left: 0,
-    //   right: 0,
-    //   bottom: 0,
-    //   opacity: 0.5
-    // }
+   
  })

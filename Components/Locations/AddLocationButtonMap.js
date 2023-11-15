@@ -21,7 +21,7 @@ const handlePress = () => {
             onPress={handlePress} 
             style={styles.Pressable}
             >
-             <Icon name="add-plus-button" height="40" width="40" style={styles.icon} color='gray'/>
+             <Icon name="add-plus-button" height="40" width="40" style={styles.icon} color='#4578DE'/>
           </Pressable>  
       </View>
     );
@@ -29,8 +29,8 @@ const handlePress = () => {
 
   const styles = StyleSheet.create({
     Pressable: {
-      borderColor: 'darkgrey',
-      borderWidth: 2,
+      borderColor: '#4578DE',
+      borderWidth: 4,
       borderRadius: 40,
       backgroundColor: 'white'
     },

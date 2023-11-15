@@ -6,7 +6,7 @@ import Icon from 'react-native-ico-material-design';
 
 export default function AddLocationMap({navigation}) {
 
-  const [draggableLocation, setDraggableLocation] = useState({latitude:55.3781,longitude:-3.4360});
+  const [draggableLocation, setDraggableLocation] = useState({latitude:56.48793266600186,longitude:-4.8637330904603004});
   const [markerText, setMarkerText] = useState("Hold and drag to select location");
 
     return (
@@ -26,8 +26,8 @@ export default function AddLocationMap({navigation}) {
           onDragStart={(e)=>setMarkerText(null)}
           onDragEnd={(e)=>setDraggableLocation(e.nativeEvent.coordinate)}>
             <View style={styles.marker}>
-            <Text>{markerText}</Text>
-           <Icon name="map-placeholder" color='red' height="40" width="40"/>
+            <Text style={{fontWeight: "bold" , marginBottom: 5}}>{markerText}</Text>
+           <Icon name="map-placeholder" color='red' height="40" width="40" />
           </View>
           </Marker>
         </MapView>

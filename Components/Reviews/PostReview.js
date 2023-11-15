@@ -22,8 +22,8 @@ export default function PostReview({ location_id, reviews, setReviews, reviewCou
             setIsAdding(true);
 
             const reviewToBeAdded = {
-                username: user,
-                uid: 'uidToBeUpdated',
+                username: user.displayName,
+                uid: user.uid,
                 body: reviewText,
                 rating_for_location: rating,
             };
