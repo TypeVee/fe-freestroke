@@ -16,6 +16,13 @@ export default function SingleLocationContainer({ location, reviewCount, average
     month: 'short',
     year: 'numeric',
   });
+  const componentDidUpdate = () => {
+    if (shouldBlockNavigation) {
+      window.onbeforeunload = () => true
+    } else {
+      window.onbeforeunload = undefined
+    }
+  }
 
   const handleSave = () => {
     if(saving === false){

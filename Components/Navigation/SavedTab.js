@@ -16,7 +16,7 @@ export default function SavedTab({navigation}) {
             <Text>Saved Locations</Text>
                 {
                 savedLocations.map(location=>
-                    <SavedLocationCard style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} navigation={navigation} location={location}/>
+                    <SavedLocationCard style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} navigation={navigation} key={location.location_id} location={location}/>
                     )
                 }
             
