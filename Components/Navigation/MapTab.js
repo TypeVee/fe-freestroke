@@ -1,7 +1,7 @@
 import {  StyleSheet, View ,Text} from 'react-native';
 import { AddLocationButton } from '../Locations';
 import MapView, { Callout, Marker } from 'react-native-maps';
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState } from 'react';
 import { getLocations } from '../../api';
 
 
@@ -14,12 +14,15 @@ export default function MapTab({navigation}) {
   useEffect(()=>{
 getLocations()
 .then(({locations})=>{
+  // console.log(locations,"LOCATIONS HERRE")
   setLocationData(locations)
   setLoading(false)
 })
   },[])
 
   if (loading) {
+
+    
     return (
       <View>
         <Text>Loading...</Text>
@@ -31,12 +34,11 @@ getLocations()
   function handleMarkerPress (locationId) {
     navigation.navigate('Single Location', locationId);
   }
-
+    console.log(locationData,"LOCATION DATA")   
   return (
 
         <View style={styles.container}>
         <MapView 
-        
         style={styles.map} 
         initialRegion={{
             latitude: 54.7023545,
@@ -45,16 +47,14 @@ getLocations()
             longitudeDelta: 13,
         }}
         showsUserLocation={true}>
-          
+   
   {locationData.map((location)=>{
 
 
          const string = JSON.stringify(location)
          const parsed = JSON.parse(string)
-  
-           return  <Marker
-          key={parsed._id}
-          coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}  >
+
+           return  <Marker coordinate={{latitude: parsed.coordinates[1], longitude: parsed.coordinates[0]}}  >
           
             <Callout onPress={(e) => handleMarkerPress(parsed.location_id)}>
             <Text style={{fontWeight: "bold"}}>

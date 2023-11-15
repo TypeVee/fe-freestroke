@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View , Button} from 'react-native';
+import { StyleSheet, Text, View , TouchableOpacity} from 'react-native';
 import {AddLocationHome, TopLocations , NearbyLocations }from '../Locations/index';
 import SwimmingAdvice from '../index';
 import { useUser } from '../Navigation/AccountSetup/UserContext';
 import { ScrollView } from 'react-native-gesture-handler';
+
 
 
 
@@ -25,8 +26,15 @@ export default function HomeTab({navigation, route}) {
         <Text style={styles.headerText}>Top Rated Locations</Text>
         </View>
         <TopLocations  navigation={navigation} userLocation={userLocation}/>
-        <Button onPress={handlePress} title="All Locations"> </Button>
+        <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.AllLocationButton} onPress={handlePress}>
+  <Text style={styles.AllLocationText}>
+  All Locations
+  </Text>
+</TouchableOpacity>
+       
         <SwimmingAdvice />
+        </View>
         <AddLocationHome navigation={navigation}/>
       </ScrollView>
     );
@@ -38,17 +46,39 @@ export default function HomeTab({navigation, route}) {
   scrollViewContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: 42
+  marginBottom: 190,
 
   },
   header: {
     backgroundColor: '#D6DBFE',
     padding:10,
     width: "100%",
-    alignItems: "center"
+    alignItems: "center",
+  
   },
   headerText: {
     fontSize: 20,
     fontWeight: 'bold',
     color: "black"
- }})
+ },
+ buttonContainer: {
+  display: 'flex',
+  flexDirection: 'row',
+  justifyContent: "space-between"
+},
+AllLocationButton:{
+  backgroundColor: "#4578DE",
+  padding: 17,
+  borderRadius:10,
+  elevation: 50,
+  marginRight:15,
+
+},
+AllLocationText: {
+  color: "white",
+  fontWeight: "bold",
+  alignItems: "center",
+  fontSize: 15
+  
+    },
+})

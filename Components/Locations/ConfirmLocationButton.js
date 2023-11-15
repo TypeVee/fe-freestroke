@@ -20,14 +20,16 @@ console.log(draggableLocation,"IN BUTTON")
 
   const styles = StyleSheet.create({
  touchables: {
-      borderColor: 'darkgrey',
-      borderWidth: 2,
+      borderColor: 'white',
+      borderWidth: 3,
       borderRadius: 12,
-      backgroundColor: "#7393B3",
-      padding: 18,
+      backgroundColor: "#4578DE",
+      padding: 22,
     },
    text: {
-    color: "white"
+    color: "white",
+    fontWeight: "bold",
+    fontSize: 15
     } 
     
   })
