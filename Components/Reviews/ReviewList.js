@@ -43,7 +43,7 @@ export default function ReviewList ({reviews , setReviews, location_id, reviewCo
     };
 
     const visibleReviews = reviews.slice(0, currentPage * reviewsPerPage);
-    console.log(reviewLoading, '<<<revLoading')
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {reviewLoading ? (
