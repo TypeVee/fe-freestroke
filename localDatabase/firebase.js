@@ -1,16 +1,20 @@
 import { initializeApp } from 'firebase/app';
-import { getAuth } from 'firebase/auth';
+import { getAuth, initializeAuth, getReactNativePersistence } from 'firebase/auth';
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore } from 'firebase/firestore'
 import 'react-native-get-random-values';
 import { firebaseConfig } from './fbconfig';
+import AsyncStorage from '@react-native-async-storage/async-storage';  
 
 
 const app = initializeApp(firebaseConfig);
-const auth = getAuth(app)
+const auth = initializeAuth(app, {
+  persistence: getReactNativePersistence(AsyncStorage),
+});
+
 const db = getFirestore(app)
 
-//Functions
+
 async function handleImagePicked(ImageUri) {
         const uploadUrl = await uploadImageAsync(ImageUri);
         return uploadUrl
