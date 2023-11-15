@@ -1,7 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image, Linking} from 'react-native';
 import SingleLocation from './SingleLocation';
 import Icon from 'react-native-ico-material-design'
-const failSafeIMG = require('../../assets/failsafeIMG.jpg')
 
 export default function SavedLocationCard({navigation, location}) {
   
@@ -45,7 +44,7 @@ const styles = StyleSheet.create({
       borderRadius:5,
        },
     textMain:{
-      fontSize:18,
+      fontSize:20,
       color:"white", 
       textAlign: 'left'},
     textContainer:{flex:1},  
