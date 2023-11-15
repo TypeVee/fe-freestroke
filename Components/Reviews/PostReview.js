@@ -14,9 +14,8 @@ export default function PostReview({ location_id, reviews, setReviews, reviewCou
     const [isAdding, setIsAdding] = useState(false);
     const [postErr, setPostErr] = useState(false);
     const [isPost, setIsPost] = useState(false);
-    // const user = useUser()
+    const user = useUser()
     const navigation = useNavigation()
-    const user='milbot1992'
 
     const handlePostReview = () => {
         if (reviewText.trim() !== '') {

@@ -5,12 +5,13 @@ import { deleteReview } from '../../api';
 import ReviewVoter from './ReviewVoter';
 import { StarRating } from '../Locations/StarRating';
 import Icon from 'react-native-ico-material-design';
+import { useUser } from '../Navigation/AccountSetup/UserContext';
 
 export default function ReviewCard ({ review_id, body, username, rating_for_location, votes_for_review, created_at, setReviews, reviewCount, setReviewCount, averageRating, setAverageRating }) {
     const [isDeleting, setIsDeleting] = useState(false);
     const [deleteErr, setDeleteErr] = useState('');
     const [isDeleted, setIsDeleted] = useState(false);
-    const user = 'milbot1992'
+    const user = useUser()
     
     let timeAgo = '';
     if (Date.parse(created_at)) {
