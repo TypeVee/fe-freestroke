@@ -37,7 +37,7 @@ async function unsaveLocation(locationID, database="savedLocations",){
     return new Promise ((resolve, reject) =>{
         db.transaction(
             (tx) => {
-                tx.executeSql(`delete from ${database} where locationID = ${locationID}`, [],(_, {}) =>{
+                tx.executeSql(`delete from ${database} where location_id = ${locationID}`, [],(_, {}) =>{
                         resolve()
                     },
                     (_, error) => {
