@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, Image, View, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { StyleSheet, Text, Image, View, TouchableOpacity, Linking } from 'react-native';
 import { StarRating } from './StarRating';
-import SavedUnfilled from '../../assets/Saved.jpeg'
-import SavedFilled from '../../assets/SavedFilled.jpeg'
+import Icon from 'react-native-ico-material-design';
 import {saveLocation, unsaveLocation, findID} from '../../localDatabase/database.js'
 
 export default function SingleLocationContainer({ location, reviewCount, averageRating, saved }) {
@@ -37,18 +36,19 @@ export default function SingleLocationContainer({ location, reviewCount, average
   }
 
   const handleDirections = () => {
-    // Millie to do
-  }
-
-  const handleVisited = () => {
-    setVisitedClicked(!visitedClicked)
-    // Visited button
-  }
+    const directionsLink = `https://www.google.com/maps/dir/?api=1&destination=${location.coordinates[1]},${location.coordinates[0]}`;
+  
+    Linking.openURL(directionsLink)
+      .catch((error) => {
+        console.error(`Error opening directions link: ${error}`);
+      });
+  };
   
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text style={styles.header}>{location.location_name}</Text>
-
+      <View style={styles.header}>
+        <Text style={styles.headerText}>{location.location_name}</Text>
+      </View>
       <View style={styles.ratingContainer}>
         <View style={styles.starRating}>
           <StarRating
@@ -59,48 +59,53 @@ export default function SingleLocationContainer({ location, reviewCount, average
           </Text>
         </View>
         <TouchableOpacity onPress={handleSave} style={styles.saveButton}>
-          <Image
-            source={savedClicked ? SavedFilled : SavedUnfilled}
-            style={{ width: 24, height: 24 }}
-          />
+          {savedClicked ? <Icon name='bookmark-ribbon' color='#4578DE'/> : <Icon name='bookmark-outline' color='#4578DE'/>}
         </TouchableOpacity>
       </View>
 
       <Image source={{ uri: location.location_img_url }} style={{ width: 350, height: 250 }} />
       <View style={styles.directionsShare}>
-        <TouchableOpacity onPress={handleDirections}>
-          <Text style={styles.textDirectionsShare}>&nbsp;&nbsp;Click for directions</Text>
+        <TouchableOpacity style={styles.navigationButton} onPress={handleDirections}>
+          <Icon name='compass-with-white-needles' color='#4578DE' height="30" width="30"/>
         </TouchableOpacity>
       </View>
 
-      <View style={visitedClicked ? styles.visitedClicked : styles.visited}>
-        <TouchableOpacity onPress={handleVisited}>
-          <Text style={styles.textVisited}>{visitedClicked ? 'Visited' : 'Visited?'}</Text>
-        </TouchableOpacity>
-      </View>
-
-      <View style={styles.infoContainer}>
-        <Text style={styles.header2}>Swim Spot Information</Text>
-        <Text style={styles.text}>{location.body}</Text>
-      </View>
-
-      {location.water_classification !== null && (
-        <View style={styles.waterQualityContainer}>
-          <Text style={styles.header2}>Water Quality</Text>
-          <Text style={styles.text}>{`Water Quality Classification: ${location.water_classification}`}</Text>
-          <Text style={styles.text}>{`Date of testing: ${formattedWaterDate}`}</Text>
+      <View style={styles.mainBody}>
+        <View style={styles.infoContainer}>
+          <Text style={styles.header2}>Swim Spot Information</Text>
+          <Text style={styles.text}>{location.body}</Text>
         </View>
-      )}
+
+        {location.water_classification !== null && (
+          <View style={styles.waterQualityContainer}>
+            <Text style={styles.header2}>Water Quality</Text>
+            <Text style={styles.text}>{`Water Quality Classification: ${location.water_classification}`}</Text>
+            <Text style={styles.text}>{`Date of testing: ${formattedWaterDate}`}</Text>
+          </View>
+        )}
+      </View>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
+    position: 'absolute',
+    top: 25,
+    left: -32,
     fontWeight: 'bold',
     fontSize: 20,
-    marginTop: 10,
-    marginBottom: 10,
+    backgroundColor: '#D6DBFE',
+    width: '100%',
+    padding: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    letterSpacing: 2
   },
   header2: {
     fontWeight: 'bold',
@@ -109,65 +114,41 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   directionsShare: {
-    flexDirection: 'row',
-    justifyContent: 'space-between', 
-    alignItems: 'center',
-    alignSelf: 'flex-start',
+    position: 'absolute',
+    bottom: 250,
+    left: 14
+  },
+  navigationButton: {
+    backgroundColor: 'white',
+    padding: 7,
+    borderRadius: 8
+  },
+  mainBody: {
+    backgroundColor: 'white',
     width: 350,
-    marginLeft: 21,
+    borderRadius: 8,
+    borderWidth: 2,
+    borderColor: '#D6DBFE',
     paddingBottom: 5,
-    paddingTop: 5,
-    backgroundColor: '#A8DCFA'
-  },
-  textDirectionsShare: {
-    fontSize: 15,
-    fontWeight: 'bold',
-    color: '#1937E0'
-  },
-  visited: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-end',
-    marginRight: 22,
-    borderRadius: 3,
-    borderColor: 'black',
-    padding: 5,
-    borderWidth: 1,
-    marginTop: 5,
-    backgroundColor: '#C3C3C3'
-  },
-  visitedClicked: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    alignSelf: 'flex-end',
-    marginRight: 22,
-    borderRadius: 3,
-    borderColor: 'black',
-    padding: 5,
-    borderWidth: 1,
-    marginTop: 5,
-    backgroundColor: 'grey'
-  },
-  textVisited: {
-    fontSize: 14,
-    fontWeight: 'bold'
+    marginTop: 20
   },
   infoContainer: {
     alignSelf: 'flex-start',
-    marginHorizontal: 20
+    marginHorizontal: 15
   },
   waterQualityContainer: {
     marginTop: 10,
     alignSelf: 'flex-start',
-    marginHorizontal: 20,
+    marginHorizontal: 15,
     marginBottom: 10
   },
   ratingContainer: {
+    marginTop: 90,
     flexDirection: 'row',
     justifyContent: 'space-between', 
     alignItems: 'center',
     alignSelf: 'flex-start',
-    marginLeft: 22,
+    marginLeft: 0,
     marginBottom: 5,
     width: 350
   },
@@ -177,7 +158,7 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
   },
   startext: {
-    color: '#489fe1',
+    color: '#4578DE',
     fontWeight: 'bold',
     fontSize: 16,
     marginLeft: 4,

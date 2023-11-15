@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import ReviewList from './ReviewList';
 import React, { useState } from "react";
 import PostReview from './PostReview';
-import ReviewIcon from '../../assets/Review.png'
+import Icon from 'react-native-ico-material-design';
 
 export default function ReviewContainer({location_id, setReviewCount, reviewCount, setAverageRating, averageRating}) {
   const [reviews, setReviews] = useState([]);
@@ -14,7 +14,7 @@ export default function ReviewContainer({location_id, setReviewCount, reviewCoun
         >
           <Text style={styles.reviewsHeader}>Reviews</Text>
           <View style={styles.reviewCountContainer}>
-            <Image source={ReviewIcon} style={{ width: 18, height: 18 }} />
+          <Icon name='add-comment-button' color='#4578DE'/>
             <Text style={styles.reviewCountText}>{reviewCount}</Text>
           </View>
         </TouchableOpacity>
@@ -58,10 +58,11 @@ const styles = StyleSheet.create({
   reviewsHeader: {
     fontWeight: 'bold',
     color: 'black',
-    fontSize: 17
+    fontSize: 17,
+    letterSpacing: 1
   },
   reviewCountText: {
-    color: '#1937E0',
+    color: '#4578DE',
     fontSize: 17,
     marginLeft: 5,
     fontWeight: 'bold'

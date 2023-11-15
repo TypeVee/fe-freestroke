@@ -3,8 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity, Image, TextInput } from 'reac
 import { Picker} from '@react-native-picker/picker'
 import { postReview } from '../../api';
 import addReviewIcon from '../../assets/AddReview.png';
-
-
+import { useNavigation } from '@react-navigation/native';
+import { useUser } from '../Navigation/AccountSetup/UserContext';
+import Icon from 'react-native-ico-material-design';
 
 export default function PostReview({ location_id, reviews, setReviews, reviewCount, setReviewCount, setAverageRating, averageRating}) {
     const [showReviewForm, setShowReviewForm] = useState(false);
@@ -13,7 +14,8 @@ export default function PostReview({ location_id, reviews, setReviews, reviewCou
     const [isAdding, setIsAdding] = useState(false);
     const [postErr, setPostErr] = useState(false);
     const [isPost, setIsPost] = useState(false);
-    const user = 'milbot1992';
+    const user = useUser()
+    const navigation = useNavigation()
 
     const handlePostReview = () => {
         if (reviewText.trim() !== '') {
@@ -36,10 +38,10 @@ export default function PostReview({ location_id, reviews, setReviews, reviewCou
                     setIsPost(true);
                     const average_rating = (((averageRating * (reviewCount)) + reviewToBeAdded.rating_for_location) / (reviewCount+1)).toFixed(1);
                     const rounded_average_rating = parseFloat(average_rating);
-                    setAverageRating(rounded_average_rating)
                     
                     setTimeout(() => {
                         setReviewCount((currentCount) => Number(currentCount) + 1);
+                        setAverageRating(rounded_average_rating)
                     }, 2000);
                 })
                 .catch((error) => {
@@ -54,11 +56,19 @@ export default function PostReview({ location_id, reviews, setReviews, reviewCou
         }
     };
 
+    const handlePress = () => {
+        if (!user) {
+            navigation.navigate('Log in');
+            } else {
+            setShowReviewForm(!showReviewForm);
+        }
+    };
+
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <TouchableOpacity onPress={() => setShowReviewForm(!showReviewForm)}>
+            <TouchableOpacity onPress={handlePress}>
                 <View style={styles.postReview}>
-                    <Image source={addReviewIcon} style={{ width: 40, height: 30 }} />
+                <Icon name='square-add-button' color='#4578DE'/>
                     <Text style={styles.postReviewText}>&nbsp;&nbsp;Leave a review</Text>
                 </View>
             </TouchableOpacity>
@@ -105,7 +115,7 @@ const styles = StyleSheet.create({
         borderWidth: 2, 
         borderRadius: 5, 
         width: 350,
-        padding: 10,
+        padding: 18,
     },
     postReviewText: {
         color: '#1937E0',
@@ -121,14 +131,15 @@ const styles = StyleSheet.create({
         borderRadius: 5,
     },
     postButton: {
-        backgroundColor: '#1937E0',
+        backgroundColor: '#4578DE',
         padding: 10,
         alignItems: 'center',
         marginTop: 10,
     },
     postText: {
         color: 'white',
-      },
+        fontSize: 15
+    },
     errorText: {
       color: 'red',
       marginTop: 10,

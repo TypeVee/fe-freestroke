@@ -1,12 +1,12 @@
-import { StyleSheet, Text, View, FlatList, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, FlatList, ActivityIndicator, Image } from 'react-native';
 import SingleLocationContainer from './SingleLocationContainer';
 import ReviewContainer from '../Reviews/index';
 import React, { useEffect, useState } from 'react';
 import { getLocationByID } from '../../api';
+import Loading from '../Loading/Loading';
 import {findID} from '../../localDatabase/database.js'
 
 export default function SingleLocation({route}) {
-
     const location_id = route.params;  
     const [location, setLocation] = useState({});
     const [reviewCount, setReviewCount] = useState(0)
@@ -43,7 +43,7 @@ export default function SingleLocation({route}) {
                 <>
                 {!renderDelayed && (
                     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#F2F2F2' }}>
-                    <ActivityIndicator size="large" color="#1937E0" />
+                        <Loading style={{ width: 500, height: 1000 }}/>
                     </View>
                 )}
                 {renderDelayed && (
@@ -61,5 +61,5 @@ export default function SingleLocation({route}) {
 const styles = StyleSheet.create({
     single_location: {
         marginBottom: 50
-    }
+    },
 });

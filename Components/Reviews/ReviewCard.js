@@ -4,12 +4,14 @@ import moment from 'moment';
 import { deleteReview } from '../../api';
 import ReviewVoter from './ReviewVoter';
 import { StarRating } from '../Locations/StarRating';
+import Icon from 'react-native-ico-material-design';
+import { useUser } from '../Navigation/AccountSetup/UserContext';
 
 export default function ReviewCard ({ review_id, body, username, rating_for_location, votes_for_review, created_at, setReviews, reviewCount, setReviewCount, averageRating, setAverageRating }) {
     const [isDeleting, setIsDeleting] = useState(false);
-    const [deleteErr, setDeleteErr] = useState(false);
+    const [deleteErr, setDeleteErr] = useState('');
     const [isDeleted, setIsDeleted] = useState(false);
-    const user = 'milbot1992'
+    const user = useUser()
     
     let timeAgo = '';
     if (Date.parse(created_at)) {
@@ -34,11 +36,11 @@ export default function ReviewCard ({ review_id, body, username, rating_for_loca
             setDeleteErr('');
             const average_rating = (((averageRating * (reviewCount)) - rating_for_location) / (reviewCount-1)).toFixed(1);
             const rounded_average_rating = parseFloat(average_rating);
-            setAverageRating(rounded_average_rating)
 
             setTimeout(() => {
                 setReviewCount((currentCount) => Number(currentCount) - 1);
                 setReviews((reviews) => reviews.filter((review) => review.review_id !== review_id));
+                setAverageRating(rounded_average_rating)
             }, 2000);
         })
         .catch((error) => {
@@ -52,7 +54,11 @@ export default function ReviewCard ({ review_id, body, username, rating_for_loca
         <View style={styles.reviewCard}>
             <View style={styles.reviewCardHeader}>
                 <Text>{username}</Text>
-                <Text>⏲️ {timeAgo}</Text>
+                {user === username && (
+                    <TouchableOpacity style={styles.deleteReviewButton} onPress={handleDelete} disabled={isDeleting || isDeleted}>
+                        <Text style={styles.buttonText}>{isDeleting ? 'Deleting...' : 'Delete'}</Text>
+                    </TouchableOpacity>
+                )}
             </View>
             <View style={styles.starrating}>
                 <StarRating
@@ -60,18 +66,16 @@ export default function ReviewCard ({ review_id, body, username, rating_for_loca
                 />
             </View>
             <Text style={styles.reviewBody}>{body}</Text>
-                <View style={styles.votesanddelete}>
-                    <ReviewVoter votes_for_review={votes_for_review} review_id={review_id}/>
-                    {user === username && (
-                        <TouchableOpacity style={styles.deleteReviewButton} onPress={handleDelete} disabled={isDeleting || isDeleted}>
-                            <Text style={styles.buttonText}>{isDeleting ? 'Deleting...' : 'Delete Review'}</Text>
-                        </TouchableOpacity>
-                    )}
-                    {deleteErr !== '' && <Text style={styles.errorText}>{deleteErr}</Text>}
-                    {isDeleted && (
-                        <Text style={styles.deleteText}>Review Deleted - review will disappear from list in a few seconds</Text>
-                    )}
-                </View>
+            <View style={styles.timeandvotes}>
+                <Text style={styles.timeAgo}><Icon name="clock-with-white-face" color='black'/></Text>
+                <Text style={styles.timeAgo}>{timeAgo}</Text>
+                <Text style={styles.timeAgo}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Text>
+                <ReviewVoter votes_for_review={votes_for_review} review_id={review_id}/>
+            </View>
+            {deleteErr !== '' && <Text style={styles.errorText}>{deleteErr}</Text>}
+            {isDeleted && (
+                <Text style={styles.deleteText}>Review Deleted - review will disappear from list in a few seconds</Text>
+            )}
         </View>
     ) 
 }
@@ -81,7 +85,7 @@ const styles = StyleSheet.create({
         padding: 10,
         backgroundColor: '#fff',
         borderColor: '#D6DBFE',
-        borderWidth: 1,
+        borderWidth: 2,
         borderRadius: 8,
         width: 350,
         shadowColor: 'rgba(0, 0, 0, 0.1)',
@@ -95,19 +99,23 @@ const styles = StyleSheet.create({
         marginBottom: 10
     },
     deleteText: {
-        color: '#007BFF',
+        color: '#007BFF'
     },
     reviewCardHeader: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
-        backgroundColor: 'white',
-        borderColor: '#D6DBFE',
+        backgroundColor: '#F0F0F0',
+        borderColor: '#F0F0F0',
         borderWidth: 1,
         color: '#1937E0', 
-        padding: 10,
-        borderRadius: 8,
+        padding: 5,
+        borderRadius: 4,
         marginBottom: 10
+    },
+    timeAgo: {
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     starrating: {
         marginLeft: 6,
@@ -124,7 +132,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         textAlign: 'left',
     },
-    votesanddelete: {
+    timeandvotes: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between',
@@ -134,15 +142,15 @@ const styles = StyleSheet.create({
     },
     deleteReviewButton: {
         backgroundColor: '#D6DBFE',
-        padding: 10,
+        padding: 5,
         alignItems: 'center',
-        marginTop: 10,
-        width: 120,
+        width: 90,
         borderRadius: 8,
-        marginLeft: 130
+        marginLeft: 140
     },
     buttonText: {
         color: '#1937E0',
+        fontWeight: 'bold'
     },
     errorText: {
         color: 'red',

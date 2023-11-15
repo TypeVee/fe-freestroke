@@ -23,7 +23,6 @@ export default function ReviewList ({reviews , setReviews, location_id, reviewCo
     }, [location_id, currentPage]);
 
     const loadReviews = (page) => {
-        setReviews([])
         getReviewsById(location_id, page)
         .then((data) => {
             const newReviews = data.reviews
@@ -44,7 +43,7 @@ export default function ReviewList ({reviews , setReviews, location_id, reviewCo
     };
 
     const visibleReviews = reviews.slice(0, currentPage * reviewsPerPage);
-    
+    console.log(reviewLoading, '<<<revLoading')
     return (
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
             {reviewLoading ? (
