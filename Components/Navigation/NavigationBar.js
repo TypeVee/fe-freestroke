@@ -20,7 +20,7 @@ export default function NavigationBar({route}) {
         tabBarLabel:() => {return null},
           tabBarIcon: () => (
             <Icon name="home-button" color='#489FE1'/>
-          ),
+          ), headerShown: false 
         }}
         initialParams={{userLocation}}
         /> 

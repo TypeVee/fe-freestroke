@@ -17,9 +17,13 @@ export default function HomeTab({navigation, route}) {
   
     return (
       <ScrollView contentContainerStyle={styles.scrollViewContainer} >
-        <Text>Nearby Locations</Text>
+        <View style={styles.header}>
+        <Text style={styles.headerText}>Nearby Locations</Text>
+      </View>
         <NearbyLocations navigation={navigation} userLocation={userLocation}/>
-        <Text>Top Rated Locations</Text>
+        <View style={styles.header}>
+        <Text style={styles.headerText}>Top Rated Locations</Text>
+        </View>
         <TopLocations  navigation={navigation} userLocation={userLocation}/>
         <Button onPress={handlePress} title="All Locations"> </Button>
         <SwimmingAdvice />
@@ -33,6 +37,18 @@ export default function HomeTab({navigation, route}) {
  const styles = StyleSheet.create({
   scrollViewContainer: {
     alignItems: 'center',
-    justifyContent: 'center'
-  }
- })
+    justifyContent: 'center',
+    marginTop: 42
+
+  },
+  header: {
+    backgroundColor: '#D6DBFE',
+    padding:10,
+    width: "100%",
+    alignItems: "center"
+  },
+  headerText: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: "black"
+ }})
