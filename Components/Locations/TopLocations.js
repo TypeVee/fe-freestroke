@@ -7,7 +7,6 @@ import { getDistance } from 'geolib'
 
 
 export default function TopLocations({navigation, topRatedLocations}) {
-console.log(topRatedLocations);
     return (
       <ScrollView horizontal={true} style={{ flexDirection: 'row', margin: 10}}>
         {topRatedLocations.map((location)=> {

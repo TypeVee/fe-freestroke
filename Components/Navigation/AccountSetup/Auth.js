@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, Button } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { onAuthStateChanged, signOut } from 'firebase/auth';
 import { auth } from '../../../localDatabase/firebase';
 
@@ -38,7 +38,9 @@ const AuthDetails = () => {
     <View>
       {user ? (
         <>
-          <Button title="Sign Out" onPress={userSignOut} />
+        <TouchableOpacity style={styles.button} onPress={userSignOut}>
+        <Text style={styles.buttonText}>Sign Out</Text>
+      </TouchableOpacity>
         </>
       ) : (
         <Text>Signed Out</Text>
@@ -48,3 +50,26 @@ const AuthDetails = () => {
 };
 
 export default AuthDetails;
+
+
+const styles = StyleSheet.create({
+  // container: {
+  //   marginTop: 1, 
+  //   alignItems: 'center',
+  //   width: '100%', 
+  // },
+  button: {
+    backgroundColor: '#007bff', 
+    padding: 10,
+    borderRadius: 5,
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '80%', 
+    marginBottom:20
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 'bold',
+  }
+});

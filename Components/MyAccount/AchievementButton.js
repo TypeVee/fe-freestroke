@@ -9,25 +9,24 @@ export default function AchievementButton({ navigation, user }) {
 		<View style={styles.container}>
 			<TouchableOpacity style={styles.button} onPress={handlePress}>
 				<Text style={styles.buttonText}>Achievements</Text>
-				<Text style={styles.userInfo}>{user ? user.username : "Guest"}</Text>
 			</TouchableOpacity>
 		</View>
 	);
 }
 
 const styles = StyleSheet.create({
-	container: {
-		marginTop: 10, 
-		alignItems: "center",
-		width: "100%", 
-	},
+	// container: {
+	// 	marginTop: 10, 
+	// 	alignItems: "center",
+	// 	width: "50%", 
+	// },
 	button: {
 		backgroundColor: "#007bff",
 		padding: 10,
 		borderRadius: 5,
 		alignItems: "center",
 		justifyContent: "center",
-		width: "80%",
+		width: 150,
 		marginBottom: 10,
 	},
 	buttonText: {
