@@ -10,8 +10,7 @@ import { ScrollView } from 'react-native-gesture-handler';
 export default function HomeTab({navigation, route}) {
 
  const user = useUser();
-  const {userLocation} = route.params
-
+  const {topRatedLocations, closestLocations} = route.params
   function handlePress () {
     navigation.navigate('All Locations')
   }
@@ -21,18 +20,18 @@ export default function HomeTab({navigation, route}) {
         <View style={styles.header}>
         <Text style={styles.headerText}>Nearby Locations</Text>
       </View>
-        <NearbyLocations navigation={navigation} userLocation={userLocation}/>
+        <NearbyLocations navigation={navigation} closestLocations={closestLocations}/>
         <View style={styles.header}>
         <Text style={styles.headerText}>Top Rated Locations</Text>
         </View>
-        <TopLocations  navigation={navigation} userLocation={userLocation}/>
-        <View style={styles.buttonContainer}>
+        <TopLocations  navigation={navigation}  topRatedLocations={topRatedLocations}/>
+       <View style={styles.buttonContainer}>
         <TouchableOpacity style={styles.AllLocationButton} onPress={handlePress}>
   <Text style={styles.AllLocationText}>
   All Locations
   </Text>
 </TouchableOpacity>
-       
+
         <SwimmingAdvice />
         </View>
         <AddLocationHome navigation={navigation}/>

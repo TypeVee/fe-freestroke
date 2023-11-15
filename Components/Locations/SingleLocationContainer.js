@@ -16,6 +16,13 @@ export default function SingleLocationContainer({ location, reviewCount, average
     month: 'short',
     year: 'numeric',
   });
+  const componentDidUpdate = () => {
+    if (shouldBlockNavigation) {
+      window.onbeforeunload = () => true
+    } else {
+      window.onbeforeunload = undefined
+    }
+  }
 
   const handleSave = () => {
     if(saving === false){
@@ -115,7 +122,7 @@ const styles = StyleSheet.create({
   },
   directionsShare: {
     position: 'absolute',
-    bottom: 250,
+    top: 135,
     left: 14
   },
   navigationButton: {

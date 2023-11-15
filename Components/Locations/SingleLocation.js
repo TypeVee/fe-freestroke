@@ -24,15 +24,24 @@ export default function SingleLocation({route}) {
 
     useEffect(() => {
         getLocationByID(location_id).then((location) => {
-        setLocation(location);
-        setReviewCount(location.total_count)
-        setAverageRating(location.avg_rating)
-        setSingleLoading(false)
-        findID(location_id).then((res)=>{
-            if(JSON.parse(res).length === 1){
-                setSaved(true)
-            }
-        })
+            setLocation(location);
+            setReviewCount(location.total_count)
+            setAverageRating(location.avg_rating)
+                findID(location_id)
+                    .then((res)=>{
+                    if(JSON.parse(res).length === 1){
+                        setSaved(true)
+                        setSingleLoading(false)
+                    }
+                    else{setSingleLoading(false)}
+                    })
+                    .catch(()=>{
+                    createLocationTable().then(()=>{
+                        setSingleLoading(false)
+                    })
+                })
+        }).catch((err)=>{
+            console.log(err)
         });
     }, [location_id]);
 

@@ -15,18 +15,19 @@ export default function LocationHistoryButton({ navigation, user }) {
 }
 
 const styles = StyleSheet.create({
-  container: {
-    marginTop: 1, 
-    alignItems: 'center',
-    width: '100%', 
-  },
+  // container: {
+  //   marginTop: 1, 
+  //   alignItems: 'center',
+  //   width: '100%', 
+  // },
   button: {
     backgroundColor: '#007bff', 
     padding: 10,
     borderRadius: 5,
     alignItems: 'center',
     justifyContent: 'center',
-    width: '80%', 
+    width: 150, 
+    marginBottom:20
   },
   buttonText: {
     color: 'white',
