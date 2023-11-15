@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import { StyleSheet, Text, Image, View, TouchableOpacity, Linking } from 'react-native';
 import { StarRating } from './StarRating';
 import Icon from 'react-native-ico-material-design';
+import {saveLocation, unsaveLocation, findID} from '../../localDatabase/database.js'
 
-export default function SingleLocationContainer({ location, reviewCount, averageRating }) {
-  const [savedClicked, setSavedClicked] = useState(false)
+export default function SingleLocationContainer({ location, reviewCount, averageRating, saved }) {
+  const [savedClicked, setSavedClicked] = useState((saved ? true : false))
+  const [visitedClicked, setVisitedClicked] = useState(false)
 
   const waterDate = new Date(location.water_classification_date);
 
@@ -15,8 +17,18 @@ export default function SingleLocationContainer({ location, reviewCount, average
   });
 
   const handleSave = () => {
-    setSavedClicked(!savedClicked)
-    // @Vee - Logic here for saving location. location_id is location.location_id
+    if(savedClicked === false){
+      saveLocation(location).then((res)=>{
+        setSavedClicked(true)
+      })
+      
+    }
+    else {
+      unsaveLocation(location.location_id).then(()=>{
+        setSavedClicked(false)
+      })
+      
+    }
   }
 
   const handleDirections = () => {

@@ -12,6 +12,11 @@ import { useState, useEffect } from 'react';
 import { UserProvider } from './Components/Navigation/AccountSetup/UserContext';
 import * as Location from 'expo-location';
 import { MainComponent } from './Components/Navigation';
+import Signup from './Components/Navigation/AccountSetup/Signup';
+import AllLocations from './Components/Locations/AllLocations';
+
+
+import {createLocationTable, wipe} from './localDatabase/database'
 
 
 const Stack = createStackNavigator();
@@ -24,7 +29,7 @@ export default function App() {
   const [locationLoading, setLocationLoading] = useState(true);
   
   useEffect(() => {
-
+    createLocationTable() //DELETE WIPE ON FINAL RELEASE
     Location.requestForegroundPermissionsAsync().then((status)=>{
     if (status !== 'granted') {
             setErrorMsg('Permission to access location was denied');
@@ -57,7 +62,9 @@ export default function App() {
         <Stack.Screen name="Location History" component={LocationHistory} initialParams={{ user, setUser }}/>
         <Stack.Screen name="Add Location Map" component={AddLocationMap} initialParams={{ user, setUser }}/>
         <Stack.Screen name="Post Location" component={PostLocation} options={{ headerTitle: '', headerTransparent: true }} initialParams={{ user, setUser }}/>
-        <Stack.Screen name="Log in" component={MainComponent} initialParams={{ user, setUser }}/>
+        <Stack.Screen name="Welcome" component={MainComponent} initialParams={{ user, setUser }}/>
+        <Stack.Screen name="Sign Up" component={Signup} />
+        <Stack.Screen name="All Locations" component={AllLocations} />
       </Stack.Navigator>
     </NavigationContainer>
     </UserProvider>
