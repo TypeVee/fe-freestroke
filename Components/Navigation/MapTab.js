@@ -1,7 +1,7 @@
 import {  StyleSheet, View ,Text} from 'react-native';
 import { AddLocationButton } from '../Locations';
 import MapView, { Callout, Marker } from 'react-native-maps';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { getLocations } from '../../api';
 
 
@@ -36,6 +36,7 @@ getLocations()
 
         <View style={styles.container}>
         <MapView 
+        
         style={styles.map} 
         initialRegion={{
             latitude: 54.7023545,
