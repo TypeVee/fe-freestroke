@@ -115,7 +115,7 @@ const styles = StyleSheet.create({
   },
   directionsShare: {
     position: 'absolute',
-    bottom: 250,
+    top: 135,
     left: 14
   },
   navigationButton: {
