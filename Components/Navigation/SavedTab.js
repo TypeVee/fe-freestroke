@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
 import {useState} from 'react';
 import SavedLocationCard from '../Locations/SavedLocationCard';
 import {fetch} from "../../localDatabase/database"
@@ -12,14 +12,14 @@ export default function SavedTab({navigation}) {
         setLoading(false)     
     })
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <ScrollView >
             <Text>Saved Locations</Text>
                 {
                 savedLocations.map(location=>
-                    <SavedLocationCard navigation={navigation} location={location}/>
+                    <SavedLocationCard style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} navigation={navigation} location={location}/>
                     )
                 }
             
-        </View>
+        </ScrollView>
     )
 }
