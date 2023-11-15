@@ -11,15 +11,31 @@ export default function SavedTab({navigation}) {
         setSavedLocations(JSON.parse(res)._array)
         setLoading(false)     
     })
+
     return (
-        <ScrollView >
-            <Text>Saved Locations</Text>
+        <View style={styles.savedSpace}>
+            <ScrollView >
+            
                 {
                 savedLocations.map(location=>
-                    <SavedLocationCard style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }} navigation={navigation} key={location.location_id} location={location}/>
+                    <SavedLocationCard style={styles.locationCard} navigation={navigation} key={location.location_id} location={location}/>
                     )
                 }
             
-        </ScrollView>
+            </ScrollView>
+        </View>
     )
 }
+
+const styles = StyleSheet.create({
+    savedSpace:{
+        flex:1, 
+        flexGrow:1,
+        flexWrap: 'nowrap',
+        flexDirection: 'column',
+        justifyContent:'space-evenly',
+        alignContent:'center',
+        margin:20
+}
+  });
+  
