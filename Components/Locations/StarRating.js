@@ -1,16 +1,14 @@
 import React from 'react';
-import { StyleSheet, Image, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import Icon from 'react-native-ico-material-design';
 
 export const StarRating = ({ rating }) => {
-    const filledImage = require('../../assets/Filled.png');
-    const halfFilledImage = require('../../assets/HalfFilled.png');
-    const unfilledImage = require('../../assets/Unfilled.png');
     
     if (!rating) {
         return (
             <View style={styles.starContainer}>
                 {[...Array(5)].map((_, index) => (
-                    <Image key={index} source={unfilledImage} style={styles.star} />
+                    <Icon name='bookmark-button' color='#4578DE'/>
                 ))}
             </View>
         );
@@ -22,11 +20,11 @@ export const StarRating = ({ rating }) => {
         return (
             <View style={styles.starContainer}>
                 {[...Array(filledStars)].map((_, index) => (
-                <Image key={index} source={filledImage} style={styles.star} />
+                <Icon name='mark-as-favorite-star' color='#4578DE'/>
                 ))}
-                {hasHalfStar && <Image source={halfFilledImage} style={styles.star} />}
+                {hasHalfStar && <Icon name='half-filled-rating-star' color='#4578DE'/>}
                 {[...Array(remainingStars - (hasHalfStar ? 1 : 0))].map((_, index) => (
-                <Image key={`emptyStar-${index}`} source={unfilledImage} style={styles.star} />
+                <Icon name='bookmark-button' color='#4578DE'/>
                 ))}
             </View>
         );
