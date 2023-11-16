@@ -53,6 +53,7 @@ export default function PostLocation ({route}) {
         setSubmitting(true)
         uploadImage(imageURI)
         .then((url)=>{
+          console.log(url)
           const coordinates = [draggableLocation.latitude, draggableLocation.longitude]
           const newLocation = {
             coordinates: coordinates,

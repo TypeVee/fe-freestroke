@@ -3,6 +3,7 @@ import { getAuth, initializeAuth, getReactNativePersistence } from 'firebase/aut
 import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import { getFirestore } from 'firebase/firestore'
 import 'react-native-get-random-values';
+import { v4 as uuidv4 } from 'uuid';
 import { firebaseConfig } from './fbconfig';
 import AsyncStorage from '@react-native-async-storage/async-storage';  
 
@@ -34,7 +35,7 @@ async function uploadImageAsync(uri) {
     xhr.open("GET", uri, true);
     xhr.send(null);
   });
-    const fileRef = ref(getStorage(), uuid.v4());
+    const fileRef = ref(getStorage(), uuidv4());
     const result = await uploadBytes(fileRef, blob);
     blob.close();
   
