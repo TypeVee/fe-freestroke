@@ -102,7 +102,7 @@ const MainComponent = () => {
             onPress={() => {
               navigation.navigate('Sign Up')
             }}
-            style={{ marginTop: 'auto' }}>
+            style={{ marginBottom: 30 }}>
             <Text style={styles.formFooter}>
               Don't have an account?{' '}
               <Text style={{ textDecorationLine: 'underline' }}>Sign up</Text>

@@ -4,6 +4,7 @@ import SavedLocationCard from '../Locations/SavedLocationCard';
 import {fetch} from "../../localDatabase/database"
 
 export default function SavedTab({navigation}) {
+
     const [loading, setLoading] = useState(true)
     const [savedLocations, setSavedLocations] = useState([])
     let SavedCards = <></>
