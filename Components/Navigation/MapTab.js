@@ -14,7 +14,6 @@ export default function MapTab({navigation}) {
   useEffect(()=>{
 getLocations()
 .then(({locations})=>{
-  // console.log(locations,"LOCATIONS HERRE")
   setLocationData(locations)
   setLoading(false)
 })
@@ -34,7 +33,6 @@ getLocations()
   function handleMarkerPress (locationId) {
     navigation.navigate('Single Location', locationId);
   }
-    console.log(locationData,"LOCATION DATA")   
   return (
 
         <View style={styles.container}>

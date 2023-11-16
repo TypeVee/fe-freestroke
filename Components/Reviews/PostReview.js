@@ -27,7 +27,7 @@ export default function PostReview({ location_id, reviews, setReviews, reviewCou
                 body: reviewText,
                 rating_for_location: rating,
             };
-
+console.log(reviewToBeAdded ,'<<<<<IN POSTREVIEW')
             postReview(location_id, reviewToBeAdded)
                 .then((response) => {
                     const newReview = response.data.review;
