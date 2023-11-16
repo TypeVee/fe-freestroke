@@ -54,7 +54,7 @@ export default function ReviewCard ({ review_id, body, username, rating_for_loca
         <View style={styles.reviewCard}>
             <View style={styles.reviewCardHeader}>
                 <Text>{username}</Text>
-                {user === username && (
+                {user.displayName === username && (
                     <TouchableOpacity style={styles.deleteReviewButton} onPress={handleDelete} disabled={isDeleting || isDeleted}>
                         <Text style={styles.buttonText}>{isDeleting ? 'Deleting...' : 'Delete'}</Text>
                     </TouchableOpacity>
@@ -69,7 +69,7 @@ export default function ReviewCard ({ review_id, body, username, rating_for_loca
             <View style={styles.timeandvotes}>
                 <Text style={styles.timeAgo}><Icon name="clock-with-white-face" color='black'/></Text>
                 <Text style={styles.timeAgo}>{timeAgo}</Text>
-                <Text style={styles.timeAgo}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Text>
+                <Text style={styles.timeAgo}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</Text>
                 <ReviewVoter votes_for_review={votes_for_review} review_id={review_id}/>
             </View>
             {deleteErr !== '' && <Text style={styles.errorText}>{deleteErr}</Text>}

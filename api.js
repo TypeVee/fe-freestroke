@@ -27,7 +27,7 @@ export const deleteReview = (review_id) => {
 }
 
 export const postReview = (location_id, reviewToBeAdded) => {
-    return freeStrokeAPI.post(`/location/${location_id}/reviews`, reviewToBeAdded)
+    return freeStrokeAPI.post(`/locations/${location_id}/reviews`, reviewToBeAdded)
 }
 
 export const patchLikes = (value, review_id) => {
